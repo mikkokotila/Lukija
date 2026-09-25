@@ -1,3 +1,4 @@
+import {mockCatalog} from './catalog-fixture.mjs';
 import {test, expect} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -41,15 +42,15 @@ async function xml(page, text) {
     return {error:doc.querySelector('parsererror')?.textContent || '', ids, broken, text:doc.documentElement.textContent};
   },text);
 }
-test.beforeEach(async ({page}) => {
+test.beforeEach(async ({page}) => { await mockCatalog(page);
   if (process.env.LUKIJA_TEST_CONTENT) await page.setContent(app);
   else await page.goto('/');
 });
-test('welcome does not request the private translation', async ({page}) => {
+test('welcome discovers public works without downloading manuscripts', async ({page}) => {
   const requests=[]; page.on('request',r=>requests.push(r.url()));
   await expect(page.locator('#welcome')).toBeVisible();
   await page.waitForTimeout(100);
-  expect(requests.filter(url=>/Sanming-Tongshui/.test(url))).toEqual([]);
+  expect(requests.filter(url=>/raw\.githubusercontent|\/git\/blobs\//.test(url))).toEqual([]);
   await expect(page.locator('#load-message')).toBeHidden();
 });
 test('export is disabled until a manuscript is loaded', async ({page}) => {

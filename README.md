@@ -10,13 +10,13 @@ A quiet reading room for Chinese metaphysical works and their translations, with
 
 Open `public/index.html` in a browser, or use the deployed site. Choose **Open Markdown**, select one or more `.md` files, or paste Markdown through the library. Public Markdown URLs can also be opened. Use **Explore the typography** for a clearly labelled interface specimen, not a source translation.
 
-Local files are read on your device, not uploaded. The public reader includes no source manuscripts and does not request a private repository on startup.
+Local files are read on your device, not uploaded. The public reader bundles no translation snapshots or credentials. It discovers the two configured public translation repositories on startup; full manuscript text is downloaded only when selected.
 
 ## Collection and reading rooms
 
 **Lukija** is the permanent application identity. The **Collection** is its neutral home; **Reading room** is the current work. Returning home keeps the current work available in memory, including its position. Browser Back and Forward work within the session. Reloading does not restore imported manuscripts.
 
-**Open in this session** contains temporary local files and opened links. **The collection** is a separate shelf for intentionally published works, empty by default. No text-saving service or catalogue database is added.
+**Open in this session** contains temporary local files and opened links. **The collection** is a separate shelf for intentionally published works, starting with Yuzuan Zhouyi Zhezhong and Sanming Tonghui. No text-saving service or catalogue database is added.
 
 Each manuscript supplies its heading. Optional flat frontmatter adds work-level identity without rewriting the text:
 
@@ -31,6 +31,10 @@ edition: Study edition
 ```
 
 The first H1 remains the displayed manuscript title; otherwise the reader uses `title` frontmatter or the filename. `work_title` identifies the parent work for a volume. Chinese titles and credits are shown only when supplied, except that a Chinese-only heading can also supply the Chinese title. Missing fields never inherit another work's branding. Metadata is displayed as text, not HTML.
+
+## Live translations
+
+The first two works discover their translated volumes directly from their public GitHub repositories. Each opening checks the latest file revision; background checks run every five minutes while visible. New volumes appear automatically. An open passage stays unchanged until a reader accepts the **Load latest** notice. No source changes, copied manuscripts, deployment secrets, or scheduled builds are required. See [Live collection](LIVE-COLLECTION.md) for the publication workflow, freshness guarantees, limitations, and stable book/volume links.
 
 ## Export an EPUB
 
@@ -53,7 +57,7 @@ npm ci
 npm run dev
 ```
 
-`public/index.html` is the reader source and standalone deliverable. `src/epub.js` is the EPUB engine source; `npm run build` embeds it into the HTML. Commit both when changing EPUB behavior. There is no front-end framework or client-side package installation.
+`public/index.html` is the reader source and standalone deliverable. `src/epub.js` and `src/catalog.js` are the EPUB and live-catalogue engines; `npm run build` embeds both into the HTML. Commit the source modules and built HTML together when changing either. There is no front-end framework or client-side package installation.
 
 ## Deploy to Cloudflare Workers
 
@@ -95,11 +99,11 @@ CI also validates every generated test EPUB with **EPUBCheck 5.4.0** and fails o
 EPUBCHECK_JAR=/path/to/epubcheck.jar npm run test:epub
 ```
 
-Test manuscripts are synthetic. They are not excerpts copied from the private translation repository. Test exports and reports are ignored by Git.
+Test manuscripts are synthetic. They are not excerpts copied from the translation repositories. Catalogue tests mock GitHub, including revisions, new volumes, stale CDN replies, and failures, without consuming live API quota. Test exports and reports are ignored by Git.
 
 ## Manuscripts and configuration
 
-The `CONFIG` object has no default source repository, initial manuscript, or book identity. Keep `autoLoad` false for the neutral collection. Configure the optional public repository fields to enable **Refresh published collection**, which checks a same-site `reader-manifest.json` before repository discovery. This is the existing opt-in loader, not a text-storage service.
+The `CONFIG` object has no default source repository, initial manuscript, or book identity. Keep `autoLoad` false for the neutral collection. The independent `WORKS` registry in `src/catalog.js` defines the live, multi-work catalogue; it does not use these legacy single-repository settings. Configure the optional public repository fields to enable **Refresh published collection**, which checks a same-site `reader-manifest.json` before repository discovery. This is the existing opt-in loader, not a text-storage service.
 
 `public/reader-manifest.example.json` is an example, not an active catalogue. Only publish a manifest when its files exist and are intended to be public. Anything deployed under `public/` can be public regardless of `.gitignore`.
 

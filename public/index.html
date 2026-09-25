@@ -71,6 +71,9 @@ body[data-view="collection"] .sidebar-bottom{margin-top:auto}body[data-view="col
 @media(max-width:350px){.collection-hero h1{font-size:37px}.toolbar-label #toolbar-volume{max-width:135px}.collection-topline .eyebrow{font-size:6.5px}.collection-section-head{align-items:flex-start;flex-direction:column;gap:4px}}
 @media print{#welcome,.primary-nav,.continue-reading{display:none!important}}
 
+
+/* The first published works: one card per work, one reading room per volume. */
+.published-card{padding:25px;gap:12px;min-height:290px}.published-card .work-card-original{order:0;color:var(--ink);font-size:29px;letter-spacing:.08em}.work-card-kicker{font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--red)}.work-card-status{font-size:10px;color:var(--muted);line-height:1.7}.published-card .work-card-title{font-size:25px}.published-card .work-card-detail{font:14px/1.7 var(--serif)}.live-caption{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.live-caption .text-button{font-size:10px;padding:5px 0;white-space:nowrap}.work-dialog-han{font:25px/1.6 var(--han);letter-spacing:.1em;margin:10px 0}.work-source-actions{display:flex;gap:22px;flex-wrap:wrap;margin:22px 0}.work-source-actions .text-button{font-size:11px}#work-dialog-title{overflow-wrap:anywhere}#work-volume-list{padding-left:0}.catalog-library-row{display:flex;gap:12px;align-items:center}.catalog-library-row .library-item-title{font-size:17px}.revision-notice button{white-space:normal;min-width:62px}body[data-view="collection"] #revision-notice{display:none!important}@media(max-width:600px){.published-card{min-height:240px;padding:22px}.published-card .work-card-original{font-size:25px}.published-card .work-card-title{font-size:24px}.live-caption{gap:5px}.work-dialog-han{font-size:23px}}
 </style>
 </head>
 <body data-view="collection">
@@ -119,6 +122,7 @@ body[data-view="collection"] .sidebar-bottom{margin-top:auto}body[data-view="col
 <div class="toolbar-actions"><button class="icon-button search-trigger" id="search-trigger" aria-label="Search this text" title="Search this text (/)" aria-haspopup="dialog"><svg class="icon"><use href="#i-search"/></svg><span class="search-label">Search</span><kbd aria-hidden="true">/</kbd></button><span class="toolbar-divider" aria-hidden="true"></span><button class="icon-button" id="settings-trigger" aria-label="Reading appearance" title="Reading appearance" aria-haspopup="dialog"><span class="type-icon" aria-hidden="true">Aa</span></button><button class="icon-button" id="bookmark-button" aria-label="Bookmark this position" title="Bookmark this position (B)" aria-pressed="false"><svg class="icon"><use href="#i-bookmark"/></svg></button><button class="icon-button" id="focus-button" aria-label="Enter focus mode" title="Focus mode (F)" aria-pressed="false"><svg class="icon"><use href="#i-focus"/></svg></button></div>
 </header>
 <main class="reading-area" id="main-content" tabindex="-1">
+<div class="load-message revision-notice" id="revision-notice" hidden role="status"><p id="revision-message"></p><button id="revision-load">Load latest</button></div>
 <div class="load-message" id="load-message" hidden role="status"><p id="load-message-text"></p><button id="retry-button">Try again</button></div>
 <section id="welcome" aria-labelledby="welcome-start">
 <div class="collection-topline"><span class="eyebrow">Chinese metaphysical texts</span><span lang="zh" aria-hidden="true">靜心細讀</span></div>
@@ -126,7 +130,7 @@ body[data-view="collection"] .sidebar-bottom{margin-top:auto}body[data-view="col
 <div class="welcome-actions"><button class="primary" id="open-welcome"><svg class="icon"><use href="#i-book"/></svg>Open a manuscript</button><button class="text-button" id="demo-button">Explore the typography <svg class="icon"><use href="#i-arrow"/></svg></button></div>
 <button class="continue-reading" id="continue-reading" hidden><span><span class="eyebrow">Return to the reading room</span><span id="continue-title"></span></span><svg class="icon"><use href="#i-arrow"/></svg></button>
 <section class="collection-section" id="session-section" aria-labelledby="session-heading" hidden><div class="collection-section-head"><h2 id="session-heading">Open in this session</h2><span id="session-count" class="eyebrow"></span></div><p class="collection-caption">Your open manuscripts, here until you close or reload this page.</p><ul class="work-grid" id="session-work-list"></ul></section>
-<section class="collection-section" id="published-section" aria-labelledby="collection-heading"><div class="collection-section-head"><h2 id="collection-heading">The collection</h2><span class="shelf-caption" id="published-count">A shelf taking shape</span></div><div class="collection-empty" id="collection-empty"><span class="empty-glyph" lang="zh" aria-hidden="true">藏</span><div><h3>Room for a growing collection.</h3><p>No texts are included yet. For now, bring a manuscript of your own; a shared collection will have its place here.</p></div></div><ul class="work-grid" id="published-work-list" hidden></ul></section>
+<section class="collection-section" id="published-section" aria-labelledby="collection-heading"><div class="collection-section-head"><h2 id="collection-heading">The collection</h2><span class="shelf-caption" id="published-count">Two works · Live translations</span></div><p class="collection-caption live-caption">Read the latest published translations from GitHub. New volumes appear here automatically. <button class="text-button" id="refresh-catalog">Check for updates</button></p><div class="collection-empty" id="collection-empty"><span class="empty-glyph" lang="zh" aria-hidden="true">藏</span><div><h3>Room for a growing collection.</h3><p>The collection is connecting to its public sources. You can also open a Markdown file of your own.</p></div></div><ul class="work-grid" id="published-work-list" hidden></ul></section>
 <div class="collection-bottom"><span>Paper, ink, and a little space for thought.</span><span>Local files are not uploaded.</span></div>
 </section>
 <header class="book-header" id="book-header" hidden>
@@ -135,17 +139,18 @@ body[data-view="collection"] .sidebar-bottom{margin-top:auto}body[data-view="col
 <div class="meta-row"><div class="meta-left"><span class="source-kind" id="source-kind">Manuscript</span><span class="meta-dot" aria-hidden="true"></span><span id="reading-estimate"></span></div><span class="source-status" id="source-status">Ready to read</span></div>
 </header>
 <article class="prose" id="manuscript" hidden aria-label="Manuscript text"></article>
-<div id="manuscript-end" hidden><div class="endpiece" lang="zh" aria-label="End of the text">終</div><div class="end-actions"><p id="end-caption">You have reached the end of this manuscript.</p><button class="text-button" id="next-volume">Back to the collection <svg class="icon"><use href="#i-arrow"/></svg></button></div></div>
+<div id="manuscript-end" hidden><div class="endpiece" lang="zh" aria-label="End of the text">終</div><div class="end-actions"><p id="end-caption">You have reached the end of this manuscript.</p><button class="text-button" id="next-juan" hidden>Next volume</button><button class="text-button" id="next-volume">Back to the collection <svg class="icon"><use href="#i-arrow"/></svg></button></div></div>
 <noscript><div class="noscript-note">This reader needs JavaScript to render Markdown. Enable JavaScript and reopen this file. No server, account, or installation is required for local manuscripts.</div></noscript>
 </main>
 <footer class="reading-footer"><div class="progress-track" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-track"><div class="progress-fill" id="progress-fill"></div></div><div class="footer-section" id="footer-section"><span>序</span>A place for close reading</div><div class="footer-meta"><span class="remaining" id="remaining">Make yourself at home</span><strong id="progress-label">0%</strong></div></footer>
 </div>
 <dialog id="library-dialog" aria-labelledby="library-title"><div class="dialog-head"><div><p class="dialog-kicker">Bring a text to the reading room</p><h2 id="library-title">Open a manuscript</h2></div><button class="icon-button" data-close aria-label="Close library"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="library-tools"><button class="primary" id="import-library"><svg class="icon"><use href="#i-upload"/></svg>Open Markdown files</button><button class="secondary" id="refresh-library" hidden><svg class="icon"><use href="#i-refresh"/></svg>Refresh published collection</button></div><p class="library-status" id="library-status">Open Markdown files, paste text, or follow a public link. No account or upload is needed.</p><ul class="library-list" id="library-list"></ul><div class="library-foot"><label class="field-label" for="url-input">Or open a public Markdown URL</label><form class="url-form" id="url-form"><input type="url" id="url-input" placeholder="https://example.org/manuscript.md" required spellcheck="false" autocomplete="off"><button type="submit" class="primary" id="url-submit">Open link</button></form><p class="dialog-error" id="library-error" hidden role="alert"></p><details class="paste-details"><summary>Paste Markdown instead</summary><label class="sr-only" for="paste-input">Markdown manuscript</label><textarea id="paste-input" placeholder="# Your manuscript&#10;&#10;Paste the Markdown here…" spellcheck="false"></textarea><button class="secondary" id="paste-button">Read this text <svg class="icon"><use href="#i-arrow"/></svg></button></details><p class="privacy-note">Imported files are read locally, not uploaded. A private GitHub file may not be fetchable here even when you are signed in to GitHub; open its downloaded Markdown instead. Linked images may load from their source sites.</p></div></div></dialog>
+<dialog id="work-dialog" aria-labelledby="work-dialog-title"><div class="dialog-head"><div><p class="dialog-kicker">The translated volumes</p><p id="work-dialog-han" class="work-dialog-han" lang="zh"></p><h2 id="work-dialog-title">Choose a work</h2></div><button class="icon-button" data-close aria-label="Close work volumes"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><p class="dialog-copy" id="work-description"></p><p class="library-status" id="work-status" role="status"></p><ol class="library-list" id="work-volume-list"></ol><div class="work-source-actions"><button class="text-button" id="work-refresh">Check for updates</button><a class="text-button" id="work-repository" target="_blank" rel="noopener noreferrer">View translation source <svg class="icon"><use href="#i-external"/></svg></a></div><p class="privacy-note">Only existing translation files are listed—not untranslated source volumes. Each opening checks the latest published file. Reading already in progress is never replaced without your choice.</p></div></dialog>
 <dialog class="search-dialog" id="search-dialog" aria-label="Search this text"><div class="search-input-wrap"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><label for="search-input" class="sr-only">Search words or Chinese characters</label><input id="search-input" type="text" placeholder="Find a word, a passage, a thought…" autocomplete="off" spellcheck="false"><button class="icon-button" data-close aria-label="Close search"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="search-scope"><span id="search-scope">In this volume</span><span id="search-count" aria-live="polite">Type to search</span></div><ul class="search-results" id="search-results"></ul><div class="search-empty" id="search-empty">Search the current manuscript in English or Chinese.</div></dialog>
 <dialog class="settings-dialog" id="settings-dialog" aria-labelledby="settings-title"><div class="dialog-head"><div><p class="dialog-kicker">Make yourself at home</p><h2 id="settings-title">The reading page</h2></div><button class="icon-button" data-close aria-label="Close appearance settings"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="settings-group"><span class="field-label">Page palette</span><div class="theme-options" role="group" aria-label="Page palette"><button class="theme-choice" data-theme="paper" aria-pressed="true"><span class="theme-swatch" aria-hidden="true"></span>Paper</button><button class="theme-choice" data-theme="mist" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span>Mist</button><button class="theme-choice" data-theme="ink" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span>Ink</button></div></div><div class="settings-group"><div class="settings-row"><label for="font-size">Text size</label><output id="size-value" for="font-size">20 px</output></div><input id="font-size" type="range" min="16" max="28" step="1" value="20"><div class="settings-row muted"><span style="font:15px var(--serif)">Aa</span><span style="font:25px var(--serif)">Aa</span></div></div><div class="settings-group"><span class="field-label">Line length</span><div class="segmented" role="group" aria-label="Line length"><button data-measure="620" aria-pressed="false">Intimate</button><button data-measure="720" aria-pressed="true">Balanced</button><button data-measure="840" aria-pressed="false">Spacious</button></div></div><div class="settings-group"><div class="settings-row"><label for="line-height">Line spacing</label><output id="leading-value" for="line-height">1.88</output></div><input id="line-height" type="range" min="1.5" max="2.2" step="0.02" value="1.88"></div><div class="settings-group"><label class="citation-setting" for="auto-citations"><input type="checkbox" id="auto-citations" checked><span><strong>Separate cited passages</strong><small>Recognize attributed quotations in plain paragraphs. Unclear boundaries stay as written. The original Markdown is never changed.</small></span></label></div><p class="settings-preview">A little space for the words.<br><span lang="zh" style="font-family:var(--han);letter-spacing:.15em">靜心細讀</span></p><button class="text-button" id="reset-settings">Restore defaults</button></div></dialog>
 <dialog class="note-dialog" id="note-dialog" aria-labelledby="note-title"><div class="dialog-head"><h2 id="note-title">Note</h2><button class="icon-button" data-close aria-label="Close footnote"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="note-content" id="note-content"></div><div class="note-bottom"><button id="note-jump">Read in the endnotes <span aria-hidden="true">↗</span></button></div></dialog>
 <dialog class="source-dialog" id="source-dialog" aria-labelledby="source-title"><div class="dialog-head"><div><p class="dialog-kicker">The manuscript, unchanged</p><h2 id="source-title">Manuscript &amp; source</h2></div><button class="icon-button" data-close aria-label="Close manuscript source"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><p class="dialog-copy" id="source-description">The original Markdown is preserved exactly as loaded.</p><div class="source-actions"><a class="secondary" id="github-link" hidden target="_blank" rel="noopener noreferrer">View on GitHub <svg class="icon"><use href="#i-external"/></svg></a><button class="secondary" id="download-markdown" disabled><svg class="icon"><use href="#i-download"/></svg>Save Markdown</button><button class="primary" id="export-reader" disabled><svg class="icon"><use href="#i-book"/></svg>Save offline reading copy</button><button class="primary" id="export-epub" disabled><svg class="icon"><use href="#i-download"/></svg>Export EPUB</button><button class="secondary" id="print-button" disabled>Print</button></div><label class="field-label" for="source-textarea">Original Markdown (read-only)</label><textarea id="source-textarea" class="source-textarea" readonly spellcheck="false"></textarea><p class="privacy-note">An offline reading copy embeds this manuscript inside a new HTML file. It does not include linked images, other volumes, or your reading history. Keep private manuscripts private when sharing the copy.</p></div></dialog>
-<dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-head"><div><p class="dialog-kicker">Colophon</p><h2 id="about-title">A reader, not a facsimile.</h2></div><button class="icon-button" data-close aria-label="Close about Lukija"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="about-copy"><p>Paper, ink, a fine rule, and a vermilion reading mark. The page borrows the restraint of a printed book without imitating a historical edition or adding symbols to the source.</p><p>Chinese and English remain in the order you wrote them. Heading levels, emphasis, quotations, tables, and notes are rendered from the Markdown; no translation is generated or corrected.</p><h3>One reader, many works</h3><p>Lukija is the home for the collection. Inside a reading room, the open work supplies its own title, Chinese title, and credits. No book, author, or tradition is assigned to an unidentified manuscript.</p><p>The collection is separate from the manuscripts opened in this session. Published texts can appear here later; local imports are not saved to a collection or uploaded. Switch works without changing the reader.</p><h3>Your place stays yours</h3><p>Reading positions, bookmarks, and appearance preferences stay in this browser’s storage. Imported manuscripts are held in memory only, unless you explicitly save an offline reading copy. There is no analytics code or remote font dependency.</p><h3>Keyboard shortcuts</h3></div><div class="shortcuts"><div>Search this text</div><span><kbd>/</kbd> or <kbd>Ctrl / ⌘ K</kbd></span><div>Toggle focus mode</div><kbd>F</kbd><div>Bookmark this position</div><kbd>B</kbd><div>Open a manuscript</div><kbd>L</kbd><div>Dismiss dialog / leave focus mode</div><kbd>Esc</kbd></div><p class="privacy-note">Rendering engine: Marked 4.0.19 (MIT), embedded with its license. Parsed content is rebuilt through a restrictive DOM allowlist; scripts, styles, forms, embedded frames, and unsafe URL schemes are not rendered. The typography specimen is interface documentation, not a translation of the source.</p></div></dialog>
+<dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-head"><div><p class="dialog-kicker">Colophon</p><h2 id="about-title">A reader, not a facsimile.</h2></div><button class="icon-button" data-close aria-label="Close about Lukija"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="about-copy"><p>Paper, ink, a fine rule, and a vermilion reading mark. The page borrows the restraint of a printed book without imitating a historical edition or adding symbols to the source.</p><p>Chinese and English remain in the order you wrote them. Heading levels, emphasis, quotations, tables, and notes are rendered from the Markdown; no translation is generated or corrected.</p><h3>One reader, many works</h3><p>Lukija is the home for the collection. Inside a reading room, the open work supplies its own title, Chinese title, and credits. No book, author, or tradition is assigned to an unidentified manuscript.</p><p>The collection is separate from the manuscripts opened in this session. The first two works are read directly from their public GitHub translation directories. The reader checks for updates on opening and every five minutes while the page is visible. Local imports are not saved to a collection or uploaded. Switch works without changing the reader.</p><h3>Your place stays yours</h3><p>Reading positions, bookmarks, and appearance preferences stay in this browser’s storage. Imported manuscripts are held in memory only, unless you explicitly save an offline reading copy. There is no analytics code or remote font dependency.</p><h3>Keyboard shortcuts</h3></div><div class="shortcuts"><div>Search this text</div><span><kbd>/</kbd> or <kbd>Ctrl / ⌘ K</kbd></span><div>Toggle focus mode</div><kbd>F</kbd><div>Bookmark this position</div><kbd>B</kbd><div>Open a manuscript</div><kbd>L</kbd><div>Dismiss dialog / leave focus mode</div><kbd>Esc</kbd></div><p class="privacy-note">Rendering engine: Marked 4.0.19 (MIT), embedded with its license. Parsed content is rebuilt through a restrictive DOM allowlist; scripts, styles, forms, embedded frames, and unsafe URL schemes are not rendered. The typography specimen is interface documentation, not a translation of the source.</p></div></dialog>
 <input id="file-input" type="file" multiple accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
 <div class="toast" id="toast" role="status" hidden><span id="toast-text"></span><button id="toast-action" hidden></button></div>
 <div class="drop-overlay" id="drop-overlay" hidden aria-hidden="true"><div class="drop-han" lang="zh">讀</div><h2>A place for your manuscript.</h2><p>Drop Markdown files to add them to the reading room.</p></div>
@@ -3487,10 +3492,138 @@ nav ol { padding-left: 1.3em; } nav li { margin: .6em 0; }
 })();
 
 </script>
+<script id="catalog-engine">
+/* Public, live source catalog. No credentials, manuscript storage, or build-time snapshots. */
+(() => {
+'use strict';
+const WORKS = Object.freeze([
+  {id:'zhouyi-zhezhong', owner:'mikkokotila', repository:'Yuzuan-Zhouyi-Zhezhong', branch:'main', directory:'translation', title:'Yuzuan Zhouyi Zhezhong', chineseTitle:'御纂周易折中', description:'Imperially Compiled Balanced Interpretations of the Zhou Changes'},
+  {id:'sanming-tonghui', owner:'mikkokotila', repository:'Sanming-Tongshui', branch:'main', directory:'translation', title:'Sanming Tonghui', chineseTitle:'三命通會', description:'A Comprehensive Gathering of the Three Fates'}
+].map(Object.freeze));
+const INTERVAL = 5 * 60 * 1000, LIMIT = 4 * 1024 * 1024;
+const validName = name => /^(?:juan-\d{1,3}|front-matter|preface)\.(?:md|markdown)$/i.test(name);
+const api = work => `https://api.github.com/repos/${work.owner}/${work.repository}`;
+const raw = work => `https://raw.githubusercontent.com/${work.owner}/${work.repository}/${work.branch}/`;
+const page = work => `https://github.com/${work.owner}/${work.repository}/blob/${work.branch}/`;
+function create(onChange = () => {}) {
+  const works = WORKS.map(work => ({...work, volumes:[], checkedAt:0, attemptedAt:0, error:'', etag:'', pending:null}));
+  let retryAt = 0;
+  const get = id => { const work=works.find(w => w.id===id); if (!work) throw new Error('This work is not in the published collection.'); return work; };
+  function pathFor(work, path) {
+    if (typeof path !== 'string' || !path.startsWith(work.directory+'/') || !validName(path.slice(work.directory.length+1))) throw new Error('Choose a published translation volume.');
+    return path;
+  }
+  function descriptor(id, path) {
+    const work=get(id); pathFor(work,path); const file=work.volumes.find(f => f.path===path);
+    const match=/juan-(\d+)/i.exec(path), number=match ? Number(match[1]) : null;
+    return {id:`catalog:${id}:${path}`,kind:'catalog',catalogId:id,path,number,verified:true,
+      title:number!==null ? `Juan ${String(number).padStart(2,'0')}` : 'Front matter',workTitle:work.title,chineseTitle:work.chineseTitle,
+      sourceURL:raw(work)+path,githubURL:page(work)+path,revision:file?.sha || '',sourceBytes:file?.size || 0,checkedAt:work.checkedAt};
+  }
+  async function request(url, {headers={}, signal, limit=LIMIT}={}) {
+    const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),15000);
+    const cancel=()=>controller.abort(); signal?.addEventListener('abort',cancel,{once:true});
+    if (signal?.aborted) controller.abort();
+    try {
+      const response=await fetch(url,{headers,signal:controller.signal,credentials:'omit',referrerPolicy:'no-referrer',cache:'no-cache'});
+      if (response.status===304) return {response,bytes:null};
+      if (!response.ok) {
+        if ([403,429].includes(response.status) && new URL(url).hostname==='api.github.com') {
+          const retry=response.headers.get('retry-after'), reset=Number(response.headers.get('x-ratelimit-reset'))*1000;
+          retryAt=Math.max(Date.now()+60000, retry ? Date.now()+Number(retry)*1000 : reset || Date.now()+300000);
+          if (!Number.isFinite(retryAt)) retryAt=Date.now()+300000;
+          throw new Error('GitHub is limiting requests. Checks will resume after '+new Date(retryAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+'.');
+        }
+        throw new Error(response.status===404 ? 'The public translation is unavailable or has been removed.' : `The source returned HTTP ${response.status}.`);
+      }
+      if (Number(response.headers.get('content-length'))>limit) throw new Error('The source exceeds the reader’s size limit.');
+      const reader=response.body.getReader(), chunks=[]; let size=0;
+      while (true) {
+        const {done,value}=await reader.read(); if (done) break;
+        size+=value.byteLength; if (size>limit) {await reader.cancel(); throw new Error('The source exceeds the reader’s size limit.');} chunks.push(value);
+      }
+      const bytes=new Uint8Array(size); let offset=0; for (const chunk of chunks) {bytes.set(chunk,offset); offset+=chunk.length;}
+      return {response,bytes};
+    } catch (error) {
+      if (signal?.aborted) throw new DOMException('Cancelled','AbortError');
+      if (controller.signal.aborted) throw new Error('The source request timed out. Please try again.');
+      throw error;
+    } finally {clearTimeout(timer); signal?.removeEventListener('abort',cancel);}
+  }
+  async function refresh(id, {force=false}={}) {
+    const work=get(id);
+    if (work.pending) return work.pending;
+    if (!force && Date.now()-work.attemptedAt<INTERVAL) return !work.error && !!work.checkedAt;
+    work.pending=(async()=>{
+      work.attemptedAt=Date.now(); work.error='';
+      try {
+        if (Date.now()<retryAt) throw new Error('GitHub request limit reached. Automatic checks will resume shortly.');
+        const headers={Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2026-03-10'};
+        if (work.etag) headers['If-None-Match']=work.etag;
+        const {response,bytes}=await request(api(work)+`/contents/${work.directory}?ref=${work.branch}`,{headers,limit:1024*1024});
+        if (response.status!==304) {
+          const listing=JSON.parse(new TextDecoder().decode(bytes));
+          if (!Array.isArray(listing) || listing.length>=1000) throw new Error('The translation listing is incomplete or invalid.');
+          const files=listing.filter(f=>f.type==='file' && validName(f.name) && f.path===work.directory+'/'+f.name);
+          if (files.some(f=>!/^\w{40}$/.test(f.sha) || !/^[a-f0-9]{40}$/.test(f.sha) || !Number.isSafeInteger(f.size) || f.size<0)) throw new Error('The source listing has invalid revision information.');
+          work.volumes=files.map(f=>({path:f.path,name:f.name,sha:f.sha,size:f.size})).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+          work.etag=response.headers.get('etag') || '';
+        }
+        work.checkedAt=Date.now(); return true;
+      } catch(error) {work.error=error instanceof TypeError ? 'GitHub could not be reached. Check your connection and try again.' : error.message; return false;}
+    })();
+    onChange();
+    try {return await work.pending;} finally {work.pending=null; onChange();}
+  }
+  async function refreshAll(options) { for (const work of works) await refresh(work.id,options); }
+  async function matches(bytes, sha) {
+    if (!globalThis.crypto?.subtle) return false;
+    const header=new TextEncoder().encode(`blob ${bytes.length}\0`), blob=new Uint8Array(header.length+bytes.length);
+    blob.set(header); blob.set(bytes,header.length);
+    const digest=await crypto.subtle.digest('SHA-1',blob);
+    return [...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('')===sha;
+  }
+  async function read(id,path,signal) {
+    const work=get(id); pathFor(work,path);
+    if (!await refresh(id,{force:true})) throw new Error(work.error || 'The latest translation could not be verified.');
+    if (signal?.aborted) throw new DOMException('Cancelled','AbortError');
+    const file=work.volumes.find(f=>f.path===path);
+    if (!file) throw new Error('This volume is no longer in the published translation directory.');
+    if (file.size>LIMIT) throw new Error('This volume exceeds the 4 MB manuscript limit.');
+    const entry=descriptor(id,path); let bytes;
+    try {
+      ({bytes}=await request(raw(work)+path+'?revision='+file.sha,{signal}));
+      if (!await matches(bytes,file.sha)) bytes=null;
+    } catch(error) {if (signal?.aborted) throw error; bytes=null;}
+    if (!bytes) {
+      if (Date.now()<retryAt) throw new Error('The latest file could not be verified while GitHub is limiting requests. Your open text is unchanged.');
+      ({bytes}=await request(api(work)+'/git/blobs/'+file.sha,{signal,headers:{Accept:'application/vnd.github.raw+json'}}));
+      if (globalThis.crypto?.subtle && !await matches(bytes,file.sha)) throw new Error('The translation failed its revision check. Please try again.');
+    }
+    if (bytes.length!==file.size) throw new Error('The source size does not match the published revision.');
+    return {text:new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes),sourceURL:entry.sourceURL,descriptor:entry};
+  }
+  function identify(input) {
+    let url; try {url=new URL(input);} catch (_) {return null;}
+    if (url.username || url.password || url.protocol!=='https:') return null;
+    for (const work of works) {
+      const prefix=url.hostname==='raw.githubusercontent.com' ? raw(work) : url.hostname==='github.com' ? page(work) : '';
+      if (!prefix || !url.href.startsWith(prefix)) continue;
+      let path; try {path=decodeURIComponent(url.pathname.slice(new URL(prefix).pathname.length));} catch (_) {return null;}
+      try {const entry=descriptor(work.id,path); entry.section=url.hash; return entry;} catch (_) {return null;}
+    }
+    return null;
+  }
+  return {works,get,descriptor,refresh,refreshAll,read,identify,interval:INTERVAL};
+}
+window.LukijaCatalog=Object.freeze({create,works:WORKS});
+})();
+
+</script>
 <script id="reader-code">
 /* Lukija · a collection of independent reading rooms.
-   No manuscript is included by default. Optional published catalogues and
-   source repositories are deployment configuration, never inferred branding. */
+   Published works are discovered from their public repositories at runtime.
+   No translation snapshots or credentials are embedded in the reader. */
 (() => {
 'use strict';
 const CONFIG = Object.freeze({
@@ -4090,6 +4223,7 @@ function fromProject(path) {
   return { id:'repo:'+path, path, title:fileLabel(path), number, kind:'repository', sourceURL:rawBase ? rawBase+path : null, githubURL:githubBase ? githubBase+path : null };
 }
 function fromURL(input) {
+  const published = catalog.identify(input); if (published) return published;
   const safe = safeURL(input,location.href);
   if (!safe || !/^https?:\/\//.test(safe)) throw new Error('Use an http(s) Markdown URL, without credentials.');
   let url = new URL(safe); const section = url.hash; url.hash = '';
@@ -4102,6 +4236,114 @@ function fromURL(input) {
   if (rawBase && url.href.startsWith(rawBase)) { const desc = fromProject(decodeURIComponent(url.href.slice(rawBase.length).split('?')[0])); desc.section = section; return desc; }
   return { id:'url:'+url.href, title:fileLabel(url.pathname), number:volumeNumber(url.pathname), path:url.pathname, kind:'url', sourceURL:url.href, githubURL, section };
 }
+// Published works are grouped independently of temporary, locally opened manuscripts.
+const catalog = LukijaCatalog.create(syncCatalog);
+let selectedWork = null, catalogActive = false, catalogTimer = null;
+function catalogCard(work) {
+  const li=document.createElement('li'), button=document.createElement('button');
+  button.type='button'; button.className='work-card published-card'; button.dataset.work=work.id;
+  button.append(textElement('span','English translation · Live source','work-card-kicker'));
+  const han=textElement('span',work.chineseTitle,'work-card-original'); han.lang='zh'; button.append(han);
+  button.append(textElement('span',work.title,'work-card-title'),textElement('span',work.description,'work-card-detail'));
+  const count=work.checkedAt ? `${work.volumes.length} juan available` : 'Connect to discover volumes';
+  button.append(textElement('span',work.error ? 'Source check unavailable · Try again' : work.pending ? 'Checking GitHub…' : count,'work-card-status'));
+  const foot=textElement('span','Choose a volume','work-card-bottom'); foot.append(icon('arrow')); button.append(foot);
+  button.addEventListener('click',()=>showWork(work.id)); li.append(button); return li;
+}
+function syncCatalog() {
+  for (const work of catalog.works) {
+    if (!work.checkedAt || work.error) continue;
+    const prior=new Map(state.library.filter(e=>e.catalogId===work.id).map(e=>[e.path,e]));
+    state.library=state.library.filter(e=>e.catalogId!==work.id);
+    for (const file of work.volumes) {
+      const next=catalog.descriptor(work.id,file.path), old=prior.get(file.path);
+      state.library.push(old?.revision===next.revision ? {...old,...next,title:old.title} : next);
+    }
+  }
+  renderCollection();
+  if ($('work-dialog').open) renderWorkDialog();
+  if ($('library-dialog').open) renderLibrary();
+  syncRevisionNotice(); syncNextJuan();
+}
+function renderWorkDialog() {
+  if (!selectedWork) return;
+  const work=catalog.get(selectedWork);
+  $('work-dialog-title').textContent=work.title;
+  $('work-dialog-han').textContent=work.chineseTitle;
+  $('work-description').textContent=work.description;
+  $('work-repository').href=`https://github.com/${work.owner}/${work.repository}/tree/${work.branch}/${work.directory}`;
+  const checked=work.checkedAt ? new Date(work.checkedAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
+  $('work-status').textContent=work.error || (work.pending ? 'Checking the latest published translation…' : work.checkedAt ? `${work.volumes.length} juan available · Checked ${checked} · GitHub ${work.branch}` : 'Connect to GitHub to find the translated volumes.');
+  $('work-refresh').disabled=!!work.pending;
+  $('work-volume-list').replaceChildren();
+  for (const file of work.volumes) {
+    const entry=catalog.descriptor(work.id,file.path), li=document.createElement('li'), button=document.createElement('button');
+    button.type='button'; button.dataset.path=file.path; button.disabled=!!work.pending || !!work.error || file.size>CONFIG.maximumBytes;
+    button.setAttribute('aria-current',String(entry.id===state.current?.id));
+    const number=textElement('span',entry.number!==null ? hanNumber(entry.number) : '序','library-number'); number.lang='zh';
+    const text=textElement('span','','library-item-text');
+    text.append(textElement('span',entry.title,'library-item-title'));
+    text.append(textElement('span',file.size>CONFIG.maximumBytes ? 'Exceeds the 4 MB reader limit' : 'English translation · Revision '+file.sha.slice(0,7),'library-item-sub'));
+    button.append(number,text,icon(entry.id===state.current?.id?'check':'arrow'));
+    button.addEventListener('click',()=>{closeDialog('work-dialog'); openEntry(entry);}); li.append(button); $('work-volume-list').append(li);
+  }
+  if (!work.volumes.length) $('work-volume-list').append(textElement('li',work.pending ? 'Finding the available volumes…' : work.error ? 'The source could not be checked. Local Markdown still works.' : 'No translated volumes are published in this directory yet.','library-empty'));
+}
+async function showWork(id) {
+  selectedWork=catalog.get(id).id; renderWorkDialog(); openDialog('work-dialog');
+  await catalog.refresh(id); renderWorkDialog();
+}
+$('work-refresh').addEventListener('click',()=>catalog.refresh(selectedWork,{force:true}));
+$('refresh-catalog').addEventListener('click',()=>catalog.refreshAll({force:true}));
+function syncRevisionNotice() {
+  const current=state.current, notice=$('revision-notice'); notice.hidden=true;
+  if (current?.kind!=='catalog' || state.view!=='reading') return;
+  const work=catalog.get(current.catalogId), latest=work.volumes.find(f=>f.path===current.path);
+  if (work.pending) return;
+  if (work.error) {
+    $('revision-message').textContent='The latest source could not be checked. Your open revision is unchanged. '+work.error;
+    $('revision-load').textContent='Check again'; notice.hidden=false;
+  } else if (work.checkedAt && !latest) {
+    $('revision-message').textContent='This volume is no longer listed on GitHub. You are reading the copy already open in this session.';
+    $('revision-load').textContent='Check again'; notice.hidden=false;
+  } else if (latest && latest.sha!==current.revision) {
+    $('revision-message').textContent='A newer translation is available. Your current passage has not been changed.';
+    $('revision-load').textContent='Load latest'; notice.hidden=false;
+  }
+}
+$('revision-load').addEventListener('click',async()=>{
+  const current=state.current; if (current?.kind!=='catalog') return;
+  const work=catalog.get(current.catalogId), file=work.volumes.find(f=>f.path===current.path);
+  if (work.error || !file) {await catalog.refresh(work.id,{force:true}); return;}
+  const position=currentPosition();
+  const ok=await loadDocument(catalog.descriptor(work.id,current.path),{updateURL:false});
+  if (ok && state.current?.id===current.id) restorePosition(position);
+});
+function syncNextJuan() {
+  const current=state.current; $('next-juan').hidden=true;
+  if (current?.kind!=='catalog') return;
+  const work=catalog.get(current.catalogId), at=work.volumes.findIndex(f=>f.path===current.path);
+  const next=at<0 ? null : work.volumes[at+1]; if (!next) return;
+  $('next-juan').hidden=false; $('next-juan').textContent='Next · '+catalog.descriptor(work.id,next.path).title;
+}
+$('next-juan').addEventListener('click',()=>{
+  const current=state.current; if (current?.kind!=='catalog') return;
+  const work=catalog.get(current.catalogId), at=work.volumes.findIndex(f=>f.path===current.path), next=work.volumes[at+1];
+  if (at>=0 && next) openEntry(catalog.descriptor(work.id,next.path));
+});
+function startCatalog() {
+  if (catalogActive || !/^https?:$/.test(location.protocol)) return;
+  catalogActive=true; catalog.refreshAll();
+  catalogTimer=setInterval(()=>{if (!document.hidden && navigator.onLine) catalog.refreshAll();},catalog.interval);
+}
+window.addEventListener('focus',()=>{if (catalogActive && !document.hidden) catalog.refreshAll();});
+window.addEventListener('online',()=>{if (catalogActive) catalog.refreshAll({force:true});});
+document.addEventListener('visibilitychange',()=>{if (catalogActive && !document.hidden) catalog.refreshAll();});
+function collectionDescriptor(id,path) {
+  const work=catalog.get(id);
+  return catalog.descriptor(id,path || work.volumes[0]?.path || 'translation/juan-01.md');
+}
+
 function addToLibrary(descriptor) {
   const i = state.library.findIndex(item => item.id === descriptor.id);
   if (i < 0) state.library.push(descriptor); else state.library[i] = {...state.library[i],...descriptor};
@@ -4115,9 +4357,10 @@ function workIdentity(entry) {
     work: pick(m.work_title, m['work-title'], m.work, entry.workTitle),
     chinese: pick(m.chinese_title, m['chinese-title'], m.title_zh, m['title-zh'], entry.chineseTitle, chineseDominant(entry.title || '') ? entry.title : ''),
     romanization: pick(m.romanization, m.pinyin),
-    author: pick(m.author), translator: pick(m.translator), edition: pick(m.edition)
+    author: pick(m.author), translator: pick(m.translator), edition: pick(m.edition,m.source_edition,m.base_edition)
   };
 }
+function readingLabel(entry) { return entry.kind==='catalog' ? entry.workTitle+' · '+fileLabel(entry.path) : entry.title; }
 function renderWorkIdentity(entry, titleNode = null) {
   const identity = workIdentity(entry), specimen = entry.kind === 'specimen', title = entry.title || 'Untitled manuscript';
   const heading = titleNode || textElement('h1', title);
@@ -4140,11 +4383,11 @@ function renderWorkIdentity(entry, titleNode = null) {
   $('edition-han').textContent = hanTitle || '讀'; $('edition-han').title = hanTitle;
   $('edition-label').textContent = specimen ? 'An interface specimen, not source text' : identity.edition || 'Reading room';
   $('toolbar-room').textContent = 'Reading room';
-  $('toolbar-volume').textContent = title; $('toolbar-volume').title = title;
+  $('toolbar-volume').textContent = readingLabel(entry); $('toolbar-volume').title = readingLabel(entry);
   $('side-volume-title').textContent = identity.work || title; $('side-volume-title').title = identity.work || title;
-  $('side-volume-sub').textContent = specimen ? 'Reader documentation' : identity.work && identity.work !== title ? title : `${state.library.filter(e => e.kind !== 'specimen').length} open · Switch text`;
+  $('side-volume-sub').textContent = entry.kind==='catalog' ? fileLabel(entry.path)+' · Switch volume' : specimen ? 'Reader documentation' : identity.work && identity.work !== title ? title : `${state.library.filter(e => !['specimen','catalog'].includes(e.kind)).length} open · Switch text`;
   $('volume-glyph').textContent = entry.number ? '卷' + hanNumber(entry.number) : '文';
-  $('toc-label').textContent = 'In this text'; document.title = title + ' · Lukija';
+  $('toc-label').textContent = 'In this text'; document.title = readingLabel(entry) + ' · Lukija';
 }
 function setView(view) {
   state.view = view; document.body.dataset.view = view;
@@ -4168,6 +4411,7 @@ function showCollection(options = {}) {
   setView('collection'); state.headings = []; state.activeHeading = null;
   $('toolbar-room').textContent = 'Lukija'; $('toolbar-volume').textContent = 'Collection'; $('toolbar-volume').removeAttribute('title');
   document.title = 'Lukija · A quiet reading room'; renderCollection();
+  if (catalogActive) catalog.refreshAll();
   if (options.updateURL !== false) updateLocation(null, '', false, 'collection');
   window.scrollTo({top: 0, behavior: 'instant'});
   if (options.focus !== false) $('main-content').focus({preventScroll: true});
@@ -4178,18 +4422,18 @@ function returnToReading(options = {}) {
   if (state.view === 'reading') { closeNav(false); return; }
   closeNav(false); setView('reading'); state.headings = state.readingHeadings; renderOutline();
   $('toolbar-room').textContent = 'Reading room';
-  $('toolbar-volume').textContent = state.current.title; $('toolbar-volume').title = state.current.title;
-  document.title = state.current.title + ' · Lukija'; updateBookmarkUI();
+  $('toolbar-volume').textContent = readingLabel(state.current); $('toolbar-volume').title = readingLabel(state.current);
+  document.title = readingLabel(state.current) + ' · Lukija'; updateBookmarkUI();
   if (state.readingPosition) restorePosition(state.readingPosition);
   else window.scrollTo({top: 0, behavior: 'instant'});
-  rebuildCitationLayers();
+  rebuildCitationLayers(); syncRevisionNotice(); syncNextJuan();
   if (options.updateURL !== false) updateLocation(state.current);
   if (options.focus !== false) $('main-content').focus({preventScroll: true});
   updateProgress();
 }
 async function openEntry(entry) {
   closeDialog('library-dialog');
-  if (entry.id === state.current?.id && !state.busy) returnToReading();
+  if (entry.kind !== 'catalog' && entry.id === state.current?.id && !state.busy) returnToReading();
   else await loadDocument(entry, {section: entry.section});
 }
 function workCard(entry) {
@@ -4208,14 +4452,15 @@ function workCard(entry) {
 }
 function renderCollection() {
   const entries = state.library.filter(e => e.kind !== 'specimen');
-  const session = entries.filter(e => !e.verified), published = entries.filter(e => e.verified);
+  const session = entries.filter(e => !e.verified), published = entries.filter(e => e.verified && e.kind !== 'catalog');
   $('session-work-list').replaceChildren(...session.map(workCard));
-  $('published-work-list').replaceChildren(...published.map(workCard));
+  $('published-work-list').replaceChildren(...catalog.works.map(catalogCard),...published.map(workCard));
   $('session-section').hidden = !session.length;
   $('session-count').textContent = `${session.length} text${session.length === 1 ? '' : 's'}`;
-  $('collection-empty').hidden = !!published.length; $('published-work-list').hidden = !published.length;
-  $('published-count').textContent = published.length ? `${published.length} text${published.length === 1 ? '' : 's'}` : 'A shelf taking shape';
-  $('continue-reading').hidden = !state.current; $('continue-title').textContent = state.current?.title || '';
+  $('collection-empty').hidden = true; $('published-work-list').hidden = false;
+  $('published-count').textContent = `${catalog.works.length + published.length} works · Live translations`;
+  $('refresh-catalog').disabled = catalog.works.some(w=>w.pending);
+  $('continue-reading').hidden = !state.current; $('continue-title').textContent = state.current ? readingLabel(state.current) : '';
 }
 ['collection-link','next-volume'].forEach(id => $(id).addEventListener('click', () => showCollection()));
 $('home-link').addEventListener('click', event => { event.preventDefault(); showCollection(); });
@@ -4224,8 +4469,16 @@ $('home-link').addEventListener('click', event => { event.preventDefault(); show
 function renderLibrary() {
   renderCollection();
   $('library-list').replaceChildren();
-  const list = state.library.filter(item => item.kind !== 'specimen');
-  if (!list.length) { $('library-list').append(textElement('li','Open a Markdown file to begin.','library-status')); return; }
+  $('library-list').append(textElement('li','The published collection','library-group-label'));
+  for (const work of catalog.works) {
+    const li=document.createElement('li'), button=document.createElement('button'), text=textElement('span','','library-item-text');
+    button.type='button'; button.className='catalog-library-row'; button.dataset.work=work.id;
+    const glyph=textElement('span','書','library-number'); glyph.lang='zh';
+    text.append(textElement('span',work.title,'library-item-title'),textElement('span',work.chineseTitle+' · '+(work.checkedAt ? work.volumes.length+' juan available' : 'Choose a volume'),'library-item-sub'));
+    button.append(glyph,text,icon('arrow')); button.addEventListener('click',()=>showWork(work.id)); li.append(button); $('library-list').append(li);
+  }
+  const list = state.library.filter(item => item.kind !== 'specimen' && item.kind !== 'catalog');
+  if (list.length) $('library-list').append(textElement('li','Open in this session','library-group-label'));
   for (const entry of list) {
     const li = document.createElement('li'), button = document.createElement('button');
     button.type = 'button'; button.setAttribute('aria-current', String(entry.id === state.current?.id));
@@ -4242,7 +4495,8 @@ function renderLibrary() {
   }
 }
 function showLibrary() { renderLibrary(); $('library-error').hidden = true; openDialog('library-dialog'); }
-['library-trigger','open-welcome'].forEach(id => $(id).addEventListener('click',showLibrary));
+$('open-welcome').addEventListener('click',showLibrary);
+$('library-trigger').addEventListener('click',()=>state.current?.kind==='catalog' ? showWork(state.current.catalogId) : showLibrary());
 
 async function fetchText(url, parentSignal) {
   const controller = new AbortController();
@@ -4277,6 +4531,7 @@ async function fetchText(url, parentSignal) {
   } finally { clearTimeout(timeout); parentSignal?.removeEventListener('abort',abort); }
 }
 async function getSource(descriptor, signal) {
+  if (descriptor.kind === 'catalog') return catalog.read(descriptor.catalogId,descriptor.path,signal);
   if (typeof descriptor.text === 'string' && !['repository','url'].includes(descriptor.kind)) return {text:descriptor.text, sourceURL:descriptor.renderedBase || descriptor.sourceURL || null};
   if (descriptor.file) return {text:await descriptor.file.text(),sourceURL:null};
   if (descriptor.kind === 'repository' && /^https?:$/.test(location.protocol)) {
@@ -4299,6 +4554,7 @@ async function loadDocument(descriptor, options = {}) {
   setBusy(true); $('load-message').hidden = true; $('toast').hidden = true;
   try {
     const result = await getSource(descriptor,controller.signal);
+    if (result.descriptor) descriptor={...descriptor,...result.descriptor};
     if (new Blob([result.text]).size > CONFIG.maximumBytes) throw new Error('This file exceeds the 4 MB manuscript limit.');
     if (!result.text.trim()) throw new Error('This manuscript is empty. Add text to the Markdown file and reopen it.');
     const compiled = await parseMarkdown(result.text,controller.signal);
@@ -4313,9 +4569,9 @@ async function loadDocument(descriptor, options = {}) {
     $('manuscript').replaceChildren(fragment);
     setView('reading');
     renderWorkIdentity(candidate, prepared.titleNode);
-    const shortTitle = candidate.title;
+    const shortTitle = readingLabel(candidate);
     $('source-kind').textContent = candidate.kind === 'specimen' ? 'Design specimen' : candidate.kind === 'embedded' ? 'Offline reading copy' : candidate.kind === 'local' || candidate.kind === 'paste' ? 'Local manuscript' : 'Public manuscript';
-    $('source-status').textContent=candidate.kind === 'specimen' ? 'Not source text' : candidate.kind === 'local' || candidate.kind === 'paste' || candidate.kind === 'embedded' ? 'Opened locally' : 'Loaded from source';
+    $('source-status').textContent=candidate.kind === 'catalog' ? 'GitHub · '+candidate.revision.slice(0,7) : candidate.kind === 'specimen' ? 'Not source text' : candidate.kind === 'local' || candidate.kind === 'paste' || candidate.kind === 'embedded' ? 'Opened locally' : 'Loaded from source';
     $('source-button').disabled = false; $('bookmark-button').disabled = candidate.kind === 'specimen';
     const countable = $('manuscript').cloneNode(true);
     countable.querySelectorAll('[data-reader-ui]').forEach(el=>el.remove());
@@ -4328,7 +4584,7 @@ async function loadDocument(descriptor, options = {}) {
     $('end-caption').textContent=candidate.kind === 'specimen' ? 'End of the typography specimen. Open your own manuscript to read.' : 'You have reached the end of this manuscript.';
     document.title=shortTitle+' · '+CONFIG.title;
     buildOutline(); buildSearchIndex(); updateBookmarkUI(); renderLibrary();
-    setBusy(false); $('load-message').hidden=true;
+    setBusy(false); $('load-message').hidden=true; syncRevisionNotice(); syncNextJuan();
     const position = storageRead('position:'+candidate.id);
     state.restoring=true; window.scrollTo({top:0,behavior:'instant'});
     if (options.updateURL !== false) updateLocation(candidate,'',false);
@@ -4481,9 +4737,10 @@ function updateLocation(descriptor, hash='', replace=false, view='reading') {
   if (!/^https?:$/.test(location.protocol)) return;
   try {
     const url = new URL(location.href);
-    ['file','src','demo'].forEach(key => url.searchParams.delete(key));
+    ['file','src','demo','work'].forEach(key => url.searchParams.delete(key));
     if (view === 'reading') {
-      if (descriptor?.kind === 'repository') url.searchParams.set('file',descriptor.path);
+      if (descriptor?.kind === 'catalog') {url.searchParams.set('work',descriptor.catalogId); url.searchParams.set('file',descriptor.path);}
+      else if (descriptor?.kind === 'repository') url.searchParams.set('file',descriptor.path);
       else if (descriptor?.kind === 'url') url.searchParams.set('src',descriptor.sourceURL);
       else if (descriptor?.kind === 'specimen') url.searchParams.set('demo','1');
     }
@@ -4501,6 +4758,7 @@ window.addEventListener('popstate', event => {
   try {
     let descriptor = itemId ? state.library.find(e => e.id === itemId) : null;
     if (!descriptor && itemId === state.current?.id) descriptor = state.current;
+    if (!descriptor && params.get('work')) descriptor = collectionDescriptor(params.get('work'),params.get('file'));
     if (!descriptor && params.get('src')) descriptor = fromURL(params.get('src'));
     if (!descriptor && params.get('demo') === '1') descriptor = specimenDescriptor();
     if (!descriptor && params.get('file')) descriptor = fromProject(params.get('file'));
@@ -4705,6 +4963,7 @@ function showSource() {
     $('source-textarea').value=state.current.text;
     $('source-description').textContent=state.current.kind==='specimen' ? 'Typography specimen only. This is not a source text or translation.' : state.current.filename || state.current.path || state.current.title;
   }
+  if (state.current?.revision) $('source-description').textContent += ' · File revision '+state.current.revision;
   const sourceLink=state.current?.githubURL;
   if(sourceLink) $('github-link').href=sourceLink; else $('github-link').removeAttribute('href');
   $('github-link').hidden=!sourceLink;
@@ -4727,7 +4986,7 @@ $('export-reader').addEventListener('click',()=>{
   if (!state.current) return;
   const payload={title:state.current.title,text:state.current.text,number:state.current.number || null,
     path:state.current.path || null,sourceURL:state.current.sourceURL || null,githubURL:state.current.githubURL || null,
-    originalKind:state.current.kind};
+    originalKind:state.current.kind,workTitle:state.current.workTitle || '',chineseTitle:state.current.chineseTitle || '',revision:state.current.revision || ''};
   const escaped=JSON.stringify(payload).replace(/</g,'\\u003c').replace(/>/g,'\\u003e').replace(/&/g,'\\u0026');
   const copy=appTemplate.replace(/(<script type="application\/json" id="embedded-manuscript">)[\s\S]*?(<\/script>)/,(_,open,close)=>open+escaped+close);
   const name=state.current.filename?.replace(/\.[^.]+$/,'') || (state.current.number ? 'juan-'+String(state.current.number).padStart(2,'0'):'manuscript');
@@ -4740,7 +4999,7 @@ $('export-epub').addEventListener('click', () => {
   if (!state.current || state.busy) return;
   const metadata = state.current.metadata || {};
   epubExportDocument = state.current;
-  $('epub-book-title').value = state.current.title || 'Untitled manuscript';
+  $('epub-book-title').value = readingLabel(state.current) || 'Untitled manuscript';
   $('epub-author').value = typeof metadata.author === 'string' ? metadata.author : '';
   const language = metadata.language || metadata.lang || 'en';
   $('epub-language').value = /^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$/i.test(language) ? language : 'en';
@@ -4891,6 +5150,8 @@ async function start() {
         await loadDocument(desc,{updateURL:false,section:location.hash});return;
       }
     }
+    startCatalog();
+    if (params.has('work')) {await loadDocument(collectionDescriptor(params.get('work'),params.get('file')),{updateURL:false,section:location.hash}); return;}
     if ((!CONFIG.autoLoad || !CONFIG.initialFile) && !params.has('src') && !params.has('file')) { updateLocation(null,'',true,'collection'); return; }
     const descriptor=params.get('src') ? fromURL(params.get('src')) : fromProject(params.get('file') || CONFIG.initialFile);
     await loadDocument(descriptor,{updateURL:false,section:location.hash});

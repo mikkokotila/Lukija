@@ -1,3 +1,4 @@
+import {mockCatalog} from './catalog-fixture.mjs';
 import {test, expect} from '@playwright/test';
 const textA = '---\nwork_title: The Book of Patterns\nchinese_title: 天地之理\nauthor: Example author\ntranslator: Example translator\nedition: Study edition\n---\n# First scroll\n\nSynthetic interface fixture, not a translation.\n\n## Opening\n\nRoot text. Lie Yukou says: “What has form is born from what has no form.”\n\n## Continuation\n\n' + 'A paragraph for testing the reading position.\n\n'.repeat(45);
 async function load(page, text=textA, name='alpha.md') {
@@ -13,15 +14,16 @@ async function home(page) {
   await page.click('#collection-link');
   await expect(page.locator('#welcome')).toBeVisible();
 }
-test.beforeEach(async ({page}) => { await page.goto('/'); });
-test('the empty collection is generic and contains no configured book', async ({page}) => {
+test.beforeEach(async ({page}) => { await mockCatalog(page); await page.goto('/'); });
+test('the collection keeps generic branding and exposes two public works', async ({page}) => {
   await expect(page).toHaveTitle('Lukija · A quiet reading room');
-  await expect(page.locator('#welcome')).not.toContainText(/Sanming|Tonghui|三命通會/);
+  await expect(page.locator('.identity-title')).toHaveText('Lukija');
+  await expect(page.locator('#published-work-list button')).toHaveCount(2);
   await expect(page.locator('#session-section')).toBeHidden();
   await expect(page.locator('#book-header')).toBeHidden();
   await expect(page.locator('#reading-room-link')).toBeHidden();
   await page.click('#open-welcome');
-  await expect(page.locator('#library-list button')).toHaveCount(0);
+  await expect(page.locator('#library-list button')).toHaveCount(2);
   await expect(page.locator('#refresh-library')).toBeHidden();
 });
 test('each work supplies its own identity and missing metadata stays neutral', async ({page}) => {
@@ -38,12 +40,12 @@ test('each work supplies its own identity and missing metadata stays neutral', a
   await expect(page.locator('#edition-label')).toHaveText('Reading room');
   await expect(page.locator('#book-header')).not.toContainText(/Patterns|Example|天地之理|Sanming/);
 });
-test('session cards are distinct from the empty published collection', async ({page}) => {
+test('session cards are distinct from the two published works', async ({page}) => {
   await load(page); await load(page,'# A second work\n\nA synthetic specimen.','beta.md');
   await home(page);
   await expect(page.locator('#session-work-list .work-card')).toHaveCount(2);
-  await expect(page.locator('#published-work-list .work-card')).toHaveCount(0);
-  await expect(page.locator('#collection-empty')).toBeVisible();
+  await expect(page.locator('#published-work-list .work-card')).toHaveCount(2);
+  await expect(page.locator('#collection-empty')).toBeHidden();
   await page.locator('#session-work-list .work-card').filter({hasText:'The Book of Patterns'}).click();
   await expect(page.locator('#title-content h1')).toHaveText('First scroll');
 });

@@ -8,3 +8,11 @@ const pattern = /(<script id="epub-engine">)[\s\S]*?(<\/script>)/;
 if (!pattern.test(html)) throw new Error('Missing inline EPUB engine slot in public/index.html.');
 await writeFile(path, html.replace(pattern, (_, open, close) => open + '\n' + engine + '\n' + close));
 console.log('Built public/index.html — standalone reader with inline EPUB export.');
+
+const catalogPath = new URL('src/catalog.js', root);
+const catalog = await readFile(catalogPath, 'utf8');
+if (/<\/script/i.test(catalog)) throw new Error('Invalid embedded catalog source.');
+const built = await readFile(path, 'utf8');
+const slot = /(<script id="catalog-engine">)[\s\S]*?(<\/script>)/;
+if (!slot.test(built)) throw new Error('Missing catalog engine slot.');
+await writeFile(path, built.replace(slot, (_, open, close) => open + '\n' + catalog + '\n' + close));
