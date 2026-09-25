@@ -51,9 +51,29 @@ dialog{position:fixed;max-height:85dvh;overflow:auto;width:min(600px,calc(100vw 
 
 /* Book export follows the reading room's existing typography and controls. */
 .epub-fields{display:grid;gap:19px;margin:22px 0}.epub-fields input{display:block;width:100%;background:var(--paper);border:1px solid var(--line-strong);padding:12px 13px;font:16px var(--serif);border-radius:0}.epub-fields .field-label{display:block;margin-bottom:7px}.epub-fields .field-hint{display:block;font-size:11px;color:var(--muted);line-height:1.6;margin-top:6px}.epub-summary{font:14px/1.8 var(--serif);padding:16px 18px;border-left:2px solid var(--red);background:var(--red-wash);margin:20px 0}.epub-actions{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.epub-actions .privacy-note{max-width:285px;margin:0}.epub-image-note{font-size:12px;line-height:1.7;color:var(--muted)}
+/* Collection belongs to Lukija; each reading room belongs to its open work. */
+.identity{align-items:center;padding-bottom:27px}.identity-title{font-size:32px}.identity-subtitle{font-size:7px;letter-spacing:.15em;margin-top:6px}
+.primary-nav{border-block:1px solid var(--line);padding:12px 0;margin-bottom:27px}.primary-nav button{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;text-align:left;padding:10px 9px;font-size:12px;color:var(--muted)}.primary-nav button[aria-current="page"]{color:var(--red);background:var(--red-wash)}.primary-nav .icon{width:17px;height:17px}.primary-nav .nav-han,.primary-nav .nav-end{margin-left:auto}.nav-han{font:15px var(--han)}
+.volume-switch-title{font-size:18px;white-space:normal;overflow-wrap:anywhere;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.volume-switch-sub{line-height:1.5;overflow-wrap:anywhere}.volume-switch{margin-bottom:25px}.toolbar-label #toolbar-volume{max-width:340px}.work-credit{font:13px/1.8 var(--serif);color:var(--muted);margin:16px 0 0}.work-original-title{font:30px/1.5 var(--han);letter-spacing:.12em;margin:12px 0 0}.volume-kicker{line-height:1.8;overflow-wrap:anywhere}.edition-han{max-width:45%;overflow:hidden;text-overflow:ellipsis}
+body[data-view="collection"] .reading-context,body[data-view="collection"] #library-trigger,body[data-view="collection"] .sidebar>.side-label,body[data-view="collection"] .toc-wrap,body[data-view="collection"] #source-button,body[data-view="collection"] #resume-button,body[data-view="collection"] #search-trigger,body[data-view="collection"] #bookmark-button,body[data-view="collection"] #focus-button,body[data-view="collection"] .toolbar-divider,body[data-view="collection"] .reading-footer{display:none!important}
+body[data-view="collection"] .sidebar-bottom{margin-top:auto}body[data-view="collection"] .reading-area{max-width:1060px;padding-top:45px;padding-bottom:45px}body[data-view="collection"] .toolbar-label .room-name,body[data-view="collection"] .toolbar-label .slash{display:inline}
+.collection-topline{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line-strong);padding-bottom:17px;color:var(--muted);gap:18px}.collection-topline .eyebrow{font-size:9px;font-weight:500}.collection-topline>span:lang(zh){font:15px var(--han);letter-spacing:.27em;white-space:nowrap}
+.collection-hero{display:grid;grid-template-columns:minmax(0,1fr) 86px;gap:45px;align-items:center;padding:49px 0 0}.collection-hero .opening-note{font-size:9px;margin-bottom:22px;letter-spacing:.13em}.collection-hero h1{font:400 clamp(46px,4.9vw,70px)/1.08 var(--display);letter-spacing:-.047em;margin:0 0 25px}.collection-hero h1 em{font-weight:400}.collection-intro{font:18px/1.85 var(--serif);color:var(--muted);max-width:535px;margin:0}
+.collection-seal{height:138px;border:1px solid var(--line-strong);position:relative;display:grid;place-items:center;color:var(--red)}.collection-seal:before{content:"";position:absolute;inset:5px;border:1px solid var(--line)}.collection-seal span{font:48px var(--han)}#welcome .welcome-actions{margin:29px 0 42px;gap:24px}
+.collection-section{margin-top:30px}.collection-section-head{display:flex;justify-content:space-between;gap:16px;align-items:baseline;border-bottom:1px solid var(--line-strong);padding-bottom:12px}.collection-section-head h2{font:25px/1.4 var(--display);letter-spacing:-.025em;margin:0}.shelf-caption{font-size:9px;color:var(--muted);letter-spacing:.04em}
+.collection-empty{display:flex;align-items:flex-start;gap:24px;padding:25px 0 14px}.empty-glyph{font:27px/1.5 var(--han);color:var(--faint);padding:0 12px;border-right:1px solid var(--line)}.collection-empty h3{font:19px/1.45 var(--serif);margin:0 0 8px}.collection-empty p{font:14px/1.8 var(--serif);color:var(--muted);margin:0;max-width:480px}
+.collection-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);margin-top:34px;padding-top:18px;font-size:9px;line-height:1.7;color:var(--muted)}.collection-caption{font-size:11px;line-height:1.8;color:var(--muted);margin:12px 0 17px}
+.continue-reading{display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left;width:100%;border-left:2px solid var(--red);background:var(--red-wash);padding:17px 21px;margin:0 0 30px}.continue-reading .eyebrow{display:block;font-size:8px;color:var(--red);margin-bottom:8px}.continue-reading #continue-title{display:block;font:22px/1.45 var(--serif);overflow-wrap:anywhere}.continue-reading>span{min-width:0}
+.work-grid{list-style:none;padding:0;margin:17px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.work-card{width:100%;height:100%;text-align:left;border:1px solid var(--line);background:var(--panel);padding:20px;display:flex;flex-direction:column;gap:10px}.work-card:hover{border-color:var(--red)}.work-card[aria-current="true"]{border-color:var(--line-strong)}.work-card-title{font:21px/1.4 var(--serif);overflow-wrap:anywhere}.work-card-original{font:16px/1.6 var(--han);color:var(--muted);overflow-wrap:anywhere}.work-card-detail{font-size:10px;line-height:1.7;color:var(--muted)}.work-card-bottom{margin-top:auto;padding-top:10px;color:var(--red);font-size:10px;display:flex;justify-content:space-between;gap:10px}.work-card-bottom .icon{width:15px;height:15px}.library-item-title{overflow-wrap:anywhere}.library-empty{font:15px/1.8 var(--serif);color:var(--muted);padding:6px 0}.library-group-label{font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;padding:20px 0 8px;list-style:none}
+@media(max-width:1180px){.identity-title{font-size:30px}.toolbar-label #toolbar-volume{max-width:260px}.collection-hero{gap:30px}.collection-hero h1{font-size:60px}}
+@media(max-width:920px){body[data-view="collection"] .reading-area{max-width:870px;padding:35px 50px 45px}.toolbar-label #toolbar-volume{max-width:260px}}
+@media(max-width:600px){body[data-view="collection"] .reading-area{padding:25px 25px 35px}.collection-topline .eyebrow{font-size:7px;letter-spacing:.13em}.collection-topline>span:lang(zh){font-size:12px;letter-spacing:.16em}.collection-hero{grid-template-columns:minmax(0,1fr) 43px;gap:17px;padding-top:35px}.collection-hero h1{font-size:43px;line-height:1.13;letter-spacing:-.045em}.collection-hero .opening-note{font-size:7px;letter-spacing:.085em}.collection-intro{font-size:16px;line-height:1.85;grid-column:1/-1}.collection-seal{height:88px}.collection-seal span{font-size:29px}.collection-hero>div:first-child{display:contents}.collection-hero .opening-note,.collection-hero h1{grid-column:1}.collection-hero .opening-note{grid-row:1;margin:0}.collection-hero h1{grid-row:2;margin:0}.collection-seal{grid-column:2;grid-row:1/3;margin:0;align-self:center}.collection-hero .collection-intro{margin-top:3px}#welcome .welcome-actions{margin:25px 0 32px;gap:14px}#welcome .welcome-actions .text-button{font-size:10px}.collection-section-head h2{font-size:23px}.shelf-caption{font-size:8px}.collection-empty{gap:15px;padding-top:21px}.empty-glyph{padding-left:0;padding-right:13px;font-size:25px}.collection-empty h3{font-size:18px}.collection-empty p{font-size:14px}.work-grid{grid-template-columns:1fr}.continue-reading{padding:16px}.continue-reading #continue-title{font-size:20px}.collection-bottom{font-size:8px;gap:7px;flex-direction:column;margin-top:27px}.toolbar-label #toolbar-volume{max-width:165px}.work-original-title{font-size:24px}.work-credit{font-size:12px}.edition-han{max-width:36%}}
+@media(max-width:350px){.collection-hero h1{font-size:37px}.toolbar-label #toolbar-volume{max-width:135px}.collection-topline .eyebrow{font-size:6.5px}.collection-section-head{align-items:flex-start;flex-direction:column;gap:4px}}
+@media print{#welcome,.primary-nav,.continue-reading{display:none!important}}
+
 </style>
 </head>
-<body>
+<body data-view="collection">
 <a href="#main-content" class="skip">Skip to the text</a>
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.6" cy="10.6" r="6.8"/><path d="m16 16 4.5 4.5"/></symbol>
@@ -77,10 +97,11 @@ dialog{position:fixed;max-height:85dvh;overflow:auto;width:min(600px,calc(100vw 
 <div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
 <aside class="sidebar" id="sidebar" aria-label="Library and contents">
 <button class="icon-button side-close" id="close-nav" aria-label="Close contents"><svg class="icon"><use href="#i-close"/></svg></button>
-<a class="identity" href="#" id="home-link" aria-label="Sanming Tonghui reading room">
-<span class="reader-mark" lang="zh" aria-hidden="true">讀</span><span><span class="identity-title">Sanming<br>Tonghui</span><span class="identity-subtitle" style="display:block">Lukija · A living translation</span></span>
+<a class="identity" href="#" id="home-link" aria-label="Lukija — collection">
+<span class="reader-mark" lang="zh" aria-hidden="true">讀</span><span><span class="identity-title">Lukija</span><span class="identity-subtitle" style="display:block">The art of close reading</span></span>
 </a>
-<div class="side-label"><span>The library</span><span lang="zh">藏</span></div>
+<nav class="primary-nav" aria-label="Lukija"><button id="collection-link" aria-current="page"><svg class="icon"><use href="#i-book"/></svg><span>Collection</span><span class="nav-han" lang="zh" aria-hidden="true">藏</span></button><button id="reading-room-link" hidden><svg class="icon"><use href="#i-file"/></svg><span>Reading room</span><svg class="icon nav-end"><use href="#i-arrow"/></svg></button></nav>
+<div class="side-label reading-context"><span>Now reading</span><span lang="zh" aria-hidden="true">讀</span></div>
 <button class="volume-switch" id="library-trigger" aria-haspopup="dialog"><span class="volume-glyph" id="volume-glyph" lang="zh" aria-hidden="true">序</span><span class="volume-switch-text"><span class="volume-switch-title" id="side-volume-title">Reading room</span><span class="volume-switch-sub" id="side-volume-sub">Open a manuscript</span></span><svg class="icon"><use href="#i-down"/></svg></button>
 <div class="side-label"><span id="toc-label">In this reading room</span><span id="toc-count">03</span></div>
 <nav class="toc-wrap" aria-labelledby="toc-label"><ol class="toc" id="toc"></ol></nav>
@@ -88,43 +109,43 @@ dialog{position:fixed;max-height:85dvh;overflow:auto;width:min(600px,calc(100vw 
 <button class="side-action" id="resume-button" hidden><svg class="icon"><use href="#i-bookmark"/></svg><span>Return to bookmark</span></button>
 <button class="side-action" id="import-side"><svg class="icon"><use href="#i-upload"/></svg><span>Open Markdown</span><span class="end" aria-hidden="true">+</span></button>
 <button class="side-action" id="source-button"><svg class="icon"><use href="#i-file"/></svg><span>Manuscript &amp; source</span><svg class="icon end"><use href="#i-external"/></svg></button>
-<button class="side-action" id="about-button"><svg class="icon"><use href="#i-info"/></svg><span>About this edition</span></button>
+<button class="side-action" id="about-button"><svg class="icon"><use href="#i-info"/></svg><span>About Lukija</span></button>
 <div class="sidebar-colophon">A quiet place for close reading</div>
 </div>
 </aside>
 <div class="shell">
 <header class="toolbar">
-<div class="toolbar-left"><button class="icon-button mobile-menu" id="mobile-menu" aria-label="Open contents" aria-controls="sidebar" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button><div class="toolbar-label"><span class="room-name">The reading room</span><span class="slash">/</span><span id="toolbar-volume">Welcome</span></div></div>
-<div class="toolbar-actions"><button class="icon-button search-trigger" id="search-trigger" aria-label="Search this volume" title="Search this volume (/)" aria-haspopup="dialog"><svg class="icon"><use href="#i-search"/></svg><span class="search-label">Search</span><kbd aria-hidden="true">/</kbd></button><span class="toolbar-divider" aria-hidden="true"></span><button class="icon-button" id="settings-trigger" aria-label="Reading appearance" title="Reading appearance" aria-haspopup="dialog"><span class="type-icon" aria-hidden="true">Aa</span></button><button class="icon-button" id="bookmark-button" aria-label="Bookmark this position" title="Bookmark this position (B)" aria-pressed="false"><svg class="icon"><use href="#i-bookmark"/></svg></button><button class="icon-button" id="focus-button" aria-label="Enter focus mode" title="Focus mode (F)" aria-pressed="false"><svg class="icon"><use href="#i-focus"/></svg></button></div>
+<div class="toolbar-left"><button class="icon-button mobile-menu" id="mobile-menu" aria-label="Open contents" aria-controls="sidebar" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button><div class="toolbar-label"><span class="room-name" id="toolbar-room">Lukija</span><span class="slash">/</span><span id="toolbar-volume">Collection</span></div></div>
+<div class="toolbar-actions"><button class="icon-button search-trigger" id="search-trigger" aria-label="Search this text" title="Search this text (/)" aria-haspopup="dialog"><svg class="icon"><use href="#i-search"/></svg><span class="search-label">Search</span><kbd aria-hidden="true">/</kbd></button><span class="toolbar-divider" aria-hidden="true"></span><button class="icon-button" id="settings-trigger" aria-label="Reading appearance" title="Reading appearance" aria-haspopup="dialog"><span class="type-icon" aria-hidden="true">Aa</span></button><button class="icon-button" id="bookmark-button" aria-label="Bookmark this position" title="Bookmark this position (B)" aria-pressed="false"><svg class="icon"><use href="#i-bookmark"/></svg></button><button class="icon-button" id="focus-button" aria-label="Enter focus mode" title="Focus mode (F)" aria-pressed="false"><svg class="icon"><use href="#i-focus"/></svg></button></div>
 </header>
 <main class="reading-area" id="main-content" tabindex="-1">
-<header class="book-header" id="book-header">
-<div class="edition-line"><span class="edition-label eyebrow" id="edition-label">The translation in progress</span><span class="edition-han" lang="zh">三命通會</span></div>
-<div class="title-block" id="title-block"><div id="title-content"><h1 class="book-name" lang="zh">三命通會</h1><p class="roman-title">Sanming Tonghui</p></div><div class="bookplate" aria-hidden="true"><span lang="zh" id="bookplate-text">靜心細讀</span></div></div>
-<div class="meta-row"><div class="meta-left"><span class="source-kind" id="source-kind">The reading room</span><span class="meta-dot" aria-hidden="true"></span><span id="reading-estimate">One volume at a time</span></div><span class="source-status" id="source-status">Ready to read</span></div>
-</header>
 <div class="load-message" id="load-message" hidden role="status"><p id="load-message-text"></p><button id="retry-button">Try again</button></div>
-<section id="welcome" aria-label="About the reader">
-<p class="opening-note">Reader’s note · not the source text</p>
-<h2 class="intro-title" id="welcome-start">A place for close reading.</h2>
-<div class="opening-copy"><p>Some texts ask us to slow down. To stay with a passage, follow a note, and return with a little more understanding.</p><p>This is a reading room for your translation as it takes shape. Open a manuscript; its words, original passages, and annotations will find their place here.</p></div>
+<section id="welcome" aria-labelledby="welcome-start">
+<div class="collection-topline"><span class="eyebrow">Chinese metaphysical texts</span><span lang="zh" aria-hidden="true">靜心細讀</span></div>
+<div class="collection-hero"><div><p class="opening-note">Many texts. One quiet place.</p><h1 id="welcome-start">A place for<br><em>close reading.</em></h1><p class="collection-intro">A reading room for Chinese metaphysical works and their translations. Give each text room to speak, and each voice its own place on the page.</p></div><div class="collection-seal" aria-hidden="true"><span lang="zh">讀</span></div></div>
 <div class="welcome-actions"><button class="primary" id="open-welcome"><svg class="icon"><use href="#i-book"/></svg>Open a manuscript</button><button class="text-button" id="demo-button">Explore the typography <svg class="icon"><use href="#i-arrow"/></svg></button></div>
-<div class="welcome-rule" aria-hidden="true"><span lang="zh">讀</span></div>
-<div class="feature-notes" id="welcome-reading"><div><span class="note-number">01</span><h3>The text comes first.</h3><p>A considered measure, generous margins, and a place for every note. Adjust the page to the way you read.</p></div><div><span class="note-number">02</span><h3>A growing collection.</h3><p>Move between volumes, trace the outline, and return to your place. Add new manuscripts without changing the reader.</p></div></div>
-<div class="welcome-bottom" id="welcome-library">Drop one or more <code>.md</code> files anywhere to begin. Local files stay in this browser session. Reading positions and preferences are saved on this device when browser storage is available.</div>
+<button class="continue-reading" id="continue-reading" hidden><span><span class="eyebrow">Return to the reading room</span><span id="continue-title"></span></span><svg class="icon"><use href="#i-arrow"/></svg></button>
+<section class="collection-section" id="session-section" aria-labelledby="session-heading" hidden><div class="collection-section-head"><h2 id="session-heading">Open in this session</h2><span id="session-count" class="eyebrow"></span></div><p class="collection-caption">Your open manuscripts, here until you close or reload this page.</p><ul class="work-grid" id="session-work-list"></ul></section>
+<section class="collection-section" id="published-section" aria-labelledby="collection-heading"><div class="collection-section-head"><h2 id="collection-heading">The collection</h2><span class="shelf-caption" id="published-count">A shelf taking shape</span></div><div class="collection-empty" id="collection-empty"><span class="empty-glyph" lang="zh" aria-hidden="true">藏</span><div><h3>Room for a growing collection.</h3><p>No texts are included yet. For now, bring a manuscript of your own; a shared collection will have its place here.</p></div></div><ul class="work-grid" id="published-work-list" hidden></ul></section>
+<div class="collection-bottom"><span>Paper, ink, and a little space for thought.</span><span>Local files are not uploaded.</span></div>
 </section>
+<header class="book-header" id="book-header" hidden>
+<div class="edition-line"><span class="edition-label eyebrow" id="edition-label">Reading room</span><span class="edition-han" id="edition-han" lang="zh" aria-hidden="true">讀</span></div>
+<div class="title-block" id="title-block"><div id="title-content"></div><div class="bookplate" aria-hidden="true"><span lang="zh" id="bookplate-text">靜心細讀</span></div></div>
+<div class="meta-row"><div class="meta-left"><span class="source-kind" id="source-kind">Manuscript</span><span class="meta-dot" aria-hidden="true"></span><span id="reading-estimate"></span></div><span class="source-status" id="source-status">Ready to read</span></div>
+</header>
 <article class="prose" id="manuscript" hidden aria-label="Manuscript text"></article>
-<div id="manuscript-end" hidden><div class="endpiece" lang="zh" aria-label="End of the volume">卷終</div><div class="end-actions"><p id="end-caption">You have reached the end of this manuscript.</p><button class="text-button" id="next-volume">Explore the library <svg class="icon"><use href="#i-arrow"/></svg></button></div></div>
+<div id="manuscript-end" hidden><div class="endpiece" lang="zh" aria-label="End of the text">終</div><div class="end-actions"><p id="end-caption">You have reached the end of this manuscript.</p><button class="text-button" id="next-volume">Back to the collection <svg class="icon"><use href="#i-arrow"/></svg></button></div></div>
 <noscript><div class="noscript-note">This reader needs JavaScript to render Markdown. Enable JavaScript and reopen this file. No server, account, or installation is required for local manuscripts.</div></noscript>
 </main>
 <footer class="reading-footer"><div class="progress-track" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-track"><div class="progress-fill" id="progress-fill"></div></div><div class="footer-section" id="footer-section"><span>序</span>A place for close reading</div><div class="footer-meta"><span class="remaining" id="remaining">Make yourself at home</span><strong id="progress-label">0%</strong></div></footer>
 </div>
-<dialog id="library-dialog" aria-labelledby="library-title"><div class="dialog-head"><div><p class="dialog-kicker">The collection</p><h2 id="library-title">Your manuscripts</h2></div><button class="icon-button" data-close aria-label="Close library"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="library-tools"><button class="primary" id="import-library"><svg class="icon"><use href="#i-upload"/></svg>Open Markdown files</button><button class="secondary" id="refresh-library"><svg class="icon"><use href="#i-refresh"/></svg>Find repository volumes</button></div><p class="library-status" id="library-status">Open local Markdown or a public URL. The configured translation repository may be private.</p><ul class="library-list" id="library-list"></ul><div class="library-foot"><label class="field-label" for="url-input">Or open a public Markdown URL</label><form class="url-form" id="url-form"><input type="url" id="url-input" placeholder="https://github.com/…/juan-01.md" required spellcheck="false" autocomplete="off"><button type="submit" class="primary" id="url-submit">Open link</button></form><p class="dialog-error" id="library-error" hidden role="alert"></p><details class="paste-details"><summary>Paste Markdown instead</summary><label class="sr-only" for="paste-input">Markdown manuscript</label><textarea id="paste-input" placeholder="# Your manuscript&#10;&#10;Paste the Markdown here…" spellcheck="false"></textarea><button class="secondary" id="paste-button">Read this text <svg class="icon"><use href="#i-arrow"/></svg></button></details><p class="privacy-note">Imported files are read locally, not uploaded. A private GitHub file may not be fetchable here even when you are signed in to GitHub; open its downloaded Markdown instead. Linked images may load from their source sites.</p></div></div></dialog>
-<dialog class="search-dialog" id="search-dialog" aria-label="Search this volume"><div class="search-input-wrap"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><label for="search-input" class="sr-only">Search words or Chinese characters</label><input id="search-input" type="text" placeholder="Find a word, a passage, a thought…" autocomplete="off" spellcheck="false"><button class="icon-button" data-close aria-label="Close search"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="search-scope"><span id="search-scope">In this volume</span><span id="search-count" aria-live="polite">Type to search</span></div><ul class="search-results" id="search-results"></ul><div class="search-empty" id="search-empty">Search the current manuscript in English or Chinese.</div></dialog>
+<dialog id="library-dialog" aria-labelledby="library-title"><div class="dialog-head"><div><p class="dialog-kicker">Bring a text to the reading room</p><h2 id="library-title">Open a manuscript</h2></div><button class="icon-button" data-close aria-label="Close library"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="library-tools"><button class="primary" id="import-library"><svg class="icon"><use href="#i-upload"/></svg>Open Markdown files</button><button class="secondary" id="refresh-library" hidden><svg class="icon"><use href="#i-refresh"/></svg>Refresh published collection</button></div><p class="library-status" id="library-status">Open Markdown files, paste text, or follow a public link. No account or upload is needed.</p><ul class="library-list" id="library-list"></ul><div class="library-foot"><label class="field-label" for="url-input">Or open a public Markdown URL</label><form class="url-form" id="url-form"><input type="url" id="url-input" placeholder="https://example.org/manuscript.md" required spellcheck="false" autocomplete="off"><button type="submit" class="primary" id="url-submit">Open link</button></form><p class="dialog-error" id="library-error" hidden role="alert"></p><details class="paste-details"><summary>Paste Markdown instead</summary><label class="sr-only" for="paste-input">Markdown manuscript</label><textarea id="paste-input" placeholder="# Your manuscript&#10;&#10;Paste the Markdown here…" spellcheck="false"></textarea><button class="secondary" id="paste-button">Read this text <svg class="icon"><use href="#i-arrow"/></svg></button></details><p class="privacy-note">Imported files are read locally, not uploaded. A private GitHub file may not be fetchable here even when you are signed in to GitHub; open its downloaded Markdown instead. Linked images may load from their source sites.</p></div></div></dialog>
+<dialog class="search-dialog" id="search-dialog" aria-label="Search this text"><div class="search-input-wrap"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><label for="search-input" class="sr-only">Search words or Chinese characters</label><input id="search-input" type="text" placeholder="Find a word, a passage, a thought…" autocomplete="off" spellcheck="false"><button class="icon-button" data-close aria-label="Close search"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="search-scope"><span id="search-scope">In this volume</span><span id="search-count" aria-live="polite">Type to search</span></div><ul class="search-results" id="search-results"></ul><div class="search-empty" id="search-empty">Search the current manuscript in English or Chinese.</div></dialog>
 <dialog class="settings-dialog" id="settings-dialog" aria-labelledby="settings-title"><div class="dialog-head"><div><p class="dialog-kicker">Make yourself at home</p><h2 id="settings-title">The reading page</h2></div><button class="icon-button" data-close aria-label="Close appearance settings"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="settings-group"><span class="field-label">Page palette</span><div class="theme-options" role="group" aria-label="Page palette"><button class="theme-choice" data-theme="paper" aria-pressed="true"><span class="theme-swatch" aria-hidden="true"></span>Paper</button><button class="theme-choice" data-theme="mist" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span>Mist</button><button class="theme-choice" data-theme="ink" aria-pressed="false"><span class="theme-swatch" aria-hidden="true"></span>Ink</button></div></div><div class="settings-group"><div class="settings-row"><label for="font-size">Text size</label><output id="size-value" for="font-size">20 px</output></div><input id="font-size" type="range" min="16" max="28" step="1" value="20"><div class="settings-row muted"><span style="font:15px var(--serif)">Aa</span><span style="font:25px var(--serif)">Aa</span></div></div><div class="settings-group"><span class="field-label">Line length</span><div class="segmented" role="group" aria-label="Line length"><button data-measure="620" aria-pressed="false">Intimate</button><button data-measure="720" aria-pressed="true">Balanced</button><button data-measure="840" aria-pressed="false">Spacious</button></div></div><div class="settings-group"><div class="settings-row"><label for="line-height">Line spacing</label><output id="leading-value" for="line-height">1.88</output></div><input id="line-height" type="range" min="1.5" max="2.2" step="0.02" value="1.88"></div><div class="settings-group"><label class="citation-setting" for="auto-citations"><input type="checkbox" id="auto-citations" checked><span><strong>Separate cited passages</strong><small>Recognize attributed quotations in plain paragraphs. Unclear boundaries stay as written. The original Markdown is never changed.</small></span></label></div><p class="settings-preview">A little space for the words.<br><span lang="zh" style="font-family:var(--han);letter-spacing:.15em">靜心細讀</span></p><button class="text-button" id="reset-settings">Restore defaults</button></div></dialog>
 <dialog class="note-dialog" id="note-dialog" aria-labelledby="note-title"><div class="dialog-head"><h2 id="note-title">Note</h2><button class="icon-button" data-close aria-label="Close footnote"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="note-content" id="note-content"></div><div class="note-bottom"><button id="note-jump">Read in the endnotes <span aria-hidden="true">↗</span></button></div></dialog>
-<dialog class="source-dialog" id="source-dialog" aria-labelledby="source-title"><div class="dialog-head"><div><p class="dialog-kicker">The manuscript, unchanged</p><h2 id="source-title">Manuscript &amp; source</h2></div><button class="icon-button" data-close aria-label="Close manuscript source"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><p class="dialog-copy" id="source-description">The original Markdown is preserved exactly as loaded.</p><div class="source-actions"><a class="secondary" id="github-link" href="https://github.com/mikkokotila/Sanming-Tongshui/blob/main/translation/juan-01.md" target="_blank" rel="noopener noreferrer">View on GitHub <svg class="icon"><use href="#i-external"/></svg></a><button class="secondary" id="download-markdown"><svg class="icon"><use href="#i-download"/></svg>Save Markdown</button><button class="primary" id="export-reader"><svg class="icon"><use href="#i-book"/></svg>Save offline reading copy</button><button class="primary" id="export-epub"><svg class="icon"><use href="#i-download"/></svg>Export EPUB</button><button class="secondary" id="print-button">Print</button></div><label class="field-label" for="source-textarea">Original Markdown (read-only)</label><textarea id="source-textarea" class="source-textarea" readonly spellcheck="false"></textarea><p class="privacy-note">An offline reading copy embeds this manuscript inside a new HTML file. It does not include linked images, other volumes, or your reading history. Keep private manuscripts private when sharing the copy.</p></div></dialog>
-<dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-head"><div><p class="dialog-kicker">Colophon</p><h2 id="about-title">A reader, not a facsimile.</h2></div><button class="icon-button" data-close aria-label="Close about this edition"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="about-copy"><p>Paper, ink, a fine rule, and a vermilion reading mark. The page borrows the restraint of a printed book without imitating a historical edition or adding symbols to the source.</p><p>Chinese and English remain in the order you wrote them. Heading levels, emphasis, quotations, tables, and notes are rendered from the Markdown; no translation is generated or corrected.</p><h3>A living library</h3><p>Place this HTML beside the <code>translation/</code> directory on a static site. The reader opens <code>translation/juan-01.md</code> first and can discover published Markdown files through the configured public GitHub repository. A <code>reader-manifest.json</code> file can supply the list instead. Local imports always work without a server.</p><h3>Your place stays yours</h3><p>Reading positions, bookmarks, and appearance preferences stay in this browser’s storage. Imported manuscripts are held in memory only, unless you explicitly save an offline reading copy. There is no analytics code or remote font dependency.</p><h3>Keyboard shortcuts</h3></div><div class="shortcuts"><div>Search this volume</div><span><kbd>/</kbd> or <kbd>Ctrl / ⌘ K</kbd></span><div>Toggle focus mode</div><kbd>F</kbd><div>Bookmark this position</div><kbd>B</kbd><div>Open the library</div><kbd>L</kbd><div>Dismiss dialog / leave focus mode</div><kbd>Esc</kbd></div><p class="privacy-note">Rendering engine: Marked 4.0.19 (MIT), embedded with its license. Parsed content is rebuilt through a restrictive DOM allowlist; scripts, styles, forms, embedded frames, and unsafe URL schemes are not rendered. The typography specimen is interface documentation, not a translation of the source.</p></div></dialog>
+<dialog class="source-dialog" id="source-dialog" aria-labelledby="source-title"><div class="dialog-head"><div><p class="dialog-kicker">The manuscript, unchanged</p><h2 id="source-title">Manuscript &amp; source</h2></div><button class="icon-button" data-close aria-label="Close manuscript source"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><p class="dialog-copy" id="source-description">The original Markdown is preserved exactly as loaded.</p><div class="source-actions"><a class="secondary" id="github-link" hidden target="_blank" rel="noopener noreferrer">View on GitHub <svg class="icon"><use href="#i-external"/></svg></a><button class="secondary" id="download-markdown" disabled><svg class="icon"><use href="#i-download"/></svg>Save Markdown</button><button class="primary" id="export-reader" disabled><svg class="icon"><use href="#i-book"/></svg>Save offline reading copy</button><button class="primary" id="export-epub" disabled><svg class="icon"><use href="#i-download"/></svg>Export EPUB</button><button class="secondary" id="print-button" disabled>Print</button></div><label class="field-label" for="source-textarea">Original Markdown (read-only)</label><textarea id="source-textarea" class="source-textarea" readonly spellcheck="false"></textarea><p class="privacy-note">An offline reading copy embeds this manuscript inside a new HTML file. It does not include linked images, other volumes, or your reading history. Keep private manuscripts private when sharing the copy.</p></div></dialog>
+<dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-head"><div><p class="dialog-kicker">Colophon</p><h2 id="about-title">A reader, not a facsimile.</h2></div><button class="icon-button" data-close aria-label="Close about Lukija"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="dialog-body"><div class="about-copy"><p>Paper, ink, a fine rule, and a vermilion reading mark. The page borrows the restraint of a printed book without imitating a historical edition or adding symbols to the source.</p><p>Chinese and English remain in the order you wrote them. Heading levels, emphasis, quotations, tables, and notes are rendered from the Markdown; no translation is generated or corrected.</p><h3>One reader, many works</h3><p>Lukija is the home for the collection. Inside a reading room, the open work supplies its own title, Chinese title, and credits. No book, author, or tradition is assigned to an unidentified manuscript.</p><p>The collection is separate from the manuscripts opened in this session. Published texts can appear here later; local imports are not saved to a collection or uploaded. Switch works without changing the reader.</p><h3>Your place stays yours</h3><p>Reading positions, bookmarks, and appearance preferences stay in this browser’s storage. Imported manuscripts are held in memory only, unless you explicitly save an offline reading copy. There is no analytics code or remote font dependency.</p><h3>Keyboard shortcuts</h3></div><div class="shortcuts"><div>Search this text</div><span><kbd>/</kbd> or <kbd>Ctrl / ⌘ K</kbd></span><div>Toggle focus mode</div><kbd>F</kbd><div>Bookmark this position</div><kbd>B</kbd><div>Open a manuscript</div><kbd>L</kbd><div>Dismiss dialog / leave focus mode</div><kbd>Esc</kbd></div><p class="privacy-note">Rendering engine: Marked 4.0.19 (MIT), embedded with its license. Parsed content is rebuilt through a restrictive DOM allowlist; scripts, styles, forms, embedded frames, and unsafe URL schemes are not rendered. The typography specimen is interface documentation, not a translation of the source.</p></div></dialog>
 <input id="file-input" type="file" multiple accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
 <div class="toast" id="toast" role="status" hidden><span id="toast-text"></span><button id="toast-action" hidden></button></div>
 <div class="drop-overlay" id="drop-overlay" hidden aria-hidden="true"><div class="drop-han" lang="zh">讀</div><h2>A place for your manuscript.</h2><p>Drop Markdown files to add them to the reading room.</p></div>
@@ -3467,39 +3488,35 @@ nav ol { padding-left: 1.3em; } nav li { margin: .6em 0; }
 
 </script>
 <script id="reader-code">
-/* Sanming reading room · standalone edition.
-   Deployment: place this HTML at the repository root, beside translation/.
-   The linked translation repository is private. No source translation
-   is bundled or published by this app. The optional typography specimen is explicitly labeled; it includes
-   one short quotation provided in the reader design feedback.
-*/
+/* Lukija · a collection of independent reading rooms.
+   No manuscript is included by default. Optional published catalogues and
+   source repositories are deployment configuration, never inferred branding. */
 (() => {
 'use strict';
 const CONFIG = Object.freeze({
-  owner: 'mikkokotila',
-  repository: 'Sanming-Tongshui', // The supplied repository spelling is preserved.
+  owner: '',
+  repository: '', // Optional public source; no book is configured by default.
   branch: 'main',
   directory: 'translation',
-  initialFile: 'translation/juan-01.md',
-  autoLoad: false, // Public app: do not request the private translation on startup.
-  title: 'Sanming Tonghui', // Display title assumes 三命通會; change if appropriate.
-  chineseTitle: '三命通會',
+  initialFile: '',
+  autoLoad: false,
+  title: 'Lukija',
   manifest: 'reader-manifest.json',
   maximumBytes: 4 * 1024 * 1024,
   fetchTimeout: 12000,
   parseTimeout: 6500,
-  storagePrefix: 'sanming-reading-room:v1:'
+  storagePrefix: 'sanming-reading-room:v1:' // Legacy key preserves existing preferences and bookmarks; never stores manuscripts.
 });
 const $ = id => document.getElementById(id);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const appTemplate = '<!doctype html>\n' + document.documentElement.outerHTML;
-const rawBase = `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repository}/${CONFIG.branch}/`;
-const githubBase = `https://github.com/${CONFIG.owner}/${CONFIG.repository}/blob/${CONFIG.branch}/`;
-const apiDirectory = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repository}/contents/${CONFIG.directory}?ref=${encodeURIComponent(CONFIG.branch)}`;
+const rawBase = CONFIG.owner && CONFIG.repository ? `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repository}/${CONFIG.branch}/` : null;
+const githubBase = rawBase ? `https://github.com/${CONFIG.owner}/${CONFIG.repository}/blob/${CONFIG.branch}/` : null;
+const apiDirectory = rawBase ? `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repository}/contents/${CONFIG.directory}?ref=${encodeURIComponent(CONFIG.branch)}` : null;
 const naturalSort = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'});
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const defaults = { theme: 'paper', size: innerWidth < 601 ? 18 : 20, measure: 720, leading: 1.88, citations: true };
-const state = { current: null, library: [], headings: [], search: [], settings: {...defaults}, busy: false,
+const state = { view: 'collection', readingPosition: null, readingHeadings: [], current: null, library: [], headings: [], search: [], settings: {...defaults}, busy: false,
   loadId: 0, controller: null, parser: null, activeHeading: null, progress: 0, minutes: 0,
   bookmark: null, canStore: true, restoring: false, lastSave: 0, toastTimer: null,
   loadedFromURL: false, discovered: false, noteTarget: null, navigationToken: 0 };
@@ -3568,13 +3585,13 @@ function openNav() {
   document.body.classList.remove('focus-mode'); syncFocus();
   document.body.classList.add('nav-open'); $('mobile-menu').setAttribute('aria-expanded', 'true');
   if (innerWidth <= 920) { $('sidebar').setAttribute('role', 'dialog'); $('sidebar').setAttribute('aria-modal', 'true'); }
-  syncSidebarAccess(); $('close-nav').focus();
+  syncSidebarAccess(); $('close-nav').focus({preventScroll:true});
 }
 function closeNav(returnFocus = true) {
   const wasOpen = document.body.classList.contains('nav-open');
   document.body.classList.remove('nav-open'); $('mobile-menu').setAttribute('aria-expanded', 'false');
   $('sidebar').removeAttribute('role'); $('sidebar').removeAttribute('aria-modal');
-  syncSidebarAccess(); if (wasOpen && returnFocus) $('mobile-menu').focus();
+  syncSidebarAccess(); if (wasOpen && returnFocus) $('mobile-menu').focus({preventScroll:true});
 }
 $('mobile-menu').addEventListener('click', openNav);
 $('close-nav').addEventListener('click', () => closeNav());
@@ -4005,7 +4022,7 @@ function formatCitationLayers(fragment) {
   }
 }
 function rebuildCitationLayers() {
-  if (!state.current || !state.sourceFragment || state.renderedCitations===state.settings.citations) return;
+  if (state.view !== 'reading' || !state.current || !state.sourceFragment || state.renderedCitations===state.settings.citations) return;
   const position=currentPosition();
   const fragment=state.sourceFragment.cloneNode(true);
   prepareContent(fragment,state.current.metadata || {},state.current);
@@ -4070,7 +4087,7 @@ function cleanPath(path) {
 function fromProject(path) {
   path = cleanPath(path);
   const number = volumeNumber(path);
-  return { id:'repo:'+path, path, title:fileLabel(path), number, kind:'repository', sourceURL:rawBase+path, githubURL:githubBase+path };
+  return { id:'repo:'+path, path, title:fileLabel(path), number, kind:'repository', sourceURL:rawBase ? rawBase+path : null, githubURL:githubBase ? githubBase+path : null };
 }
 function fromURL(input) {
   const safe = safeURL(input,location.href);
@@ -4082,7 +4099,7 @@ function fromURL(input) {
     githubURL = url.href;
     url = new URL('https://raw.githubusercontent.com/'+[parts[0],parts[1],...parts.slice(3)].join('/'));
   } else if (url.hostname === 'github.com') throw new Error('Use a GitHub file URL containing /blob/, not a repository or directory URL.');
-  if (url.href.startsWith(rawBase)) { const desc = fromProject(decodeURIComponent(url.href.slice(rawBase.length).split('?')[0])); desc.section = section; return desc; }
+  if (rawBase && url.href.startsWith(rawBase)) { const desc = fromProject(decodeURIComponent(url.href.slice(rawBase.length).split('?')[0])); desc.section = section; return desc; }
   return { id:'url:'+url.href, title:fileLabel(url.pathname), number:volumeNumber(url.pathname), path:url.pathname, kind:'url', sourceURL:url.href, githubURL, section };
 }
 function addToLibrary(descriptor) {
@@ -4090,7 +4107,122 @@ function addToLibrary(descriptor) {
   if (i < 0) state.library.push(descriptor); else state.library[i] = {...state.library[i],...descriptor};
   state.library.sort((a,b) => naturalSort.compare(a.path || a.filename || a.title,b.path || b.filename || b.title));
 }
+// Work identity comes from this manuscript only.
+function workIdentity(entry) {
+  const m = entry.metadata || {};
+  const pick = (...values) => values.find(v => typeof v === 'string' && v.trim())?.trim() || '';
+  return {
+    work: pick(m.work_title, m['work-title'], m.work, entry.workTitle),
+    chinese: pick(m.chinese_title, m['chinese-title'], m.title_zh, m['title-zh'], entry.chineseTitle, chineseDominant(entry.title || '') ? entry.title : ''),
+    romanization: pick(m.romanization, m.pinyin),
+    author: pick(m.author), translator: pick(m.translator), edition: pick(m.edition)
+  };
+}
+function renderWorkIdentity(entry, titleNode = null) {
+  const identity = workIdentity(entry), specimen = entry.kind === 'specimen', title = entry.title || 'Untitled manuscript';
+  const heading = titleNode || textElement('h1', title);
+  heading.classList.add('volume-title'); heading.id ||= 'volume-title';
+  if (chineseDominant(title)) heading.lang = 'zh';
+  const part = entry.number ? `卷${hanNumber(entry.number)} · ${fileLabel(entry.path || entry.filename || '')}` : '';
+  const kicker = specimen ? 'Typography specimen · not a translation' : [identity.work !== title ? identity.work : '', part].filter(Boolean).join(' · ') || 'The manuscript';
+  $('title-content').replaceChildren(textElement('div', kicker, 'volume-kicker'));
+  if (identity.chinese && identity.chinese !== title) {
+    const original = textElement('p', identity.chinese, 'work-original-title');
+    original.lang = 'zh'; $('title-content').append(original);
+  }
+  $('title-content').append(heading);
+  if (identity.romanization && identity.romanization !== title) $('title-content').append(textElement('p', identity.romanization, 'roman-title'));
+  const credit = [identity.author, identity.translator ? 'Translation: ' + identity.translator : ''].filter(Boolean).join(' · ');
+  if (credit) $('title-content').append(textElement('p', credit, 'work-credit'));
+  $('manuscript').setAttribute('aria-labelledby', heading.id);
+  const hanTitle = identity.chinese;
+  $('bookplate-text').textContent = hanTitle && [...hanTitle].length <= 12 ? hanTitle : '靜心細讀';
+  $('edition-han').textContent = hanTitle || '讀'; $('edition-han').title = hanTitle;
+  $('edition-label').textContent = specimen ? 'An interface specimen, not source text' : identity.edition || 'Reading room';
+  $('toolbar-room').textContent = 'Reading room';
+  $('toolbar-volume').textContent = title; $('toolbar-volume').title = title;
+  $('side-volume-title').textContent = identity.work || title; $('side-volume-title').title = identity.work || title;
+  $('side-volume-sub').textContent = specimen ? 'Reader documentation' : identity.work && identity.work !== title ? title : `${state.library.filter(e => e.kind !== 'specimen').length} open · Switch text`;
+  $('volume-glyph').textContent = entry.number ? '卷' + hanNumber(entry.number) : '文';
+  $('toc-label').textContent = 'In this text'; document.title = title + ' · Lukija';
+}
+function setView(view) {
+  state.view = view; document.body.dataset.view = view;
+  const reading = view === 'reading'; $('welcome').hidden = reading;
+  ['book-header', 'manuscript', 'manuscript-end'].forEach(id => $(id).hidden = !reading);
+  $('reading-room-link').hidden = !state.current;
+  for (const [id, active] of [['collection-link', !reading], ['reading-room-link', reading]]) {
+    if (active) $(id).setAttribute('aria-current', 'page'); else $(id).removeAttribute('aria-current');
+  }
+  $('bookmark-button').disabled = !reading || state.current?.kind === 'specimen';
+}
+function showCollection(options = {}) {
+  if (state.view === 'reading') {
+    savePosition(true); state.readingPosition = currentPosition(); state.readingHeadings = state.headings;
+  }
+  // Cancel pending loads when navigating home.
+  state.controller?.abort(); ++state.loadId; setBusy(false);
+  closeNav(false); document.body.classList.remove('focus-mode'); syncFocus();
+  document.querySelectorAll('dialog[open]').forEach(d => d.close());
+  $('load-message').hidden = true; $('toast').hidden = true;
+  setView('collection'); state.headings = []; state.activeHeading = null;
+  $('toolbar-room').textContent = 'Lukija'; $('toolbar-volume').textContent = 'Collection'; $('toolbar-volume').removeAttribute('title');
+  document.title = 'Lukija · A quiet reading room'; renderCollection();
+  if (options.updateURL !== false) updateLocation(null, '', false, 'collection');
+  window.scrollTo({top: 0, behavior: 'instant'});
+  if (options.focus !== false) $('main-content').focus({preventScroll: true});
+  updateProgress();
+}
+function returnToReading(options = {}) {
+  if (!state.current) { showLibrary(); return; }
+  if (state.view === 'reading') { closeNav(false); return; }
+  closeNav(false); setView('reading'); state.headings = state.readingHeadings; renderOutline();
+  $('toolbar-room').textContent = 'Reading room';
+  $('toolbar-volume').textContent = state.current.title; $('toolbar-volume').title = state.current.title;
+  document.title = state.current.title + ' · Lukija'; updateBookmarkUI();
+  if (state.readingPosition) restorePosition(state.readingPosition);
+  else window.scrollTo({top: 0, behavior: 'instant'});
+  rebuildCitationLayers();
+  if (options.updateURL !== false) updateLocation(state.current);
+  if (options.focus !== false) $('main-content').focus({preventScroll: true});
+  updateProgress();
+}
+async function openEntry(entry) {
+  closeDialog('library-dialog');
+  if (entry.id === state.current?.id && !state.busy) returnToReading();
+  else await loadDocument(entry, {section: entry.section});
+}
+function workCard(entry) {
+  const li = document.createElement('li'), b = document.createElement('button'), identity = workIdentity(entry);
+  b.type = 'button'; b.className = 'work-card';
+  b.setAttribute('aria-current', String(entry.id === state.current?.id));
+  b.append(textElement('span', identity.work || entry.title, 'work-card-title'));
+  if (identity.chinese && identity.chinese !== (identity.work || entry.title)) {
+    const han = textElement('span', identity.chinese, 'work-card-original'); han.lang = 'zh'; b.append(han);
+  }
+  if (identity.work && identity.work !== entry.title) b.append(textElement('span', entry.title, 'work-card-detail'));
+  const origin = entry.verified ? 'Published text' : ['local','paste'].includes(entry.kind) ? 'Local · This session' : entry.kind === 'embedded' ? 'Offline reading copy' : 'Public link · This session';
+  b.append(textElement('span', [identity.author, origin].filter(Boolean).join(' · '), 'work-card-detail'));
+  const foot = textElement('span', entry.id === state.current?.id ? 'Return to text' : 'Open reading room', 'work-card-bottom');
+  foot.append(icon('arrow')); b.append(foot); b.addEventListener('click', () => openEntry(entry)); li.append(b); return li;
+}
+function renderCollection() {
+  const entries = state.library.filter(e => e.kind !== 'specimen');
+  const session = entries.filter(e => !e.verified), published = entries.filter(e => e.verified);
+  $('session-work-list').replaceChildren(...session.map(workCard));
+  $('published-work-list').replaceChildren(...published.map(workCard));
+  $('session-section').hidden = !session.length;
+  $('session-count').textContent = `${session.length} text${session.length === 1 ? '' : 's'}`;
+  $('collection-empty').hidden = !!published.length; $('published-work-list').hidden = !published.length;
+  $('published-count').textContent = published.length ? `${published.length} text${published.length === 1 ? '' : 's'}` : 'A shelf taking shape';
+  $('continue-reading').hidden = !state.current; $('continue-title').textContent = state.current?.title || '';
+}
+['collection-link','next-volume'].forEach(id => $(id).addEventListener('click', () => showCollection()));
+$('home-link').addEventListener('click', event => { event.preventDefault(); showCollection(); });
+['reading-room-link','continue-reading'].forEach(id => $(id).addEventListener('click', () => returnToReading()));
+
 function renderLibrary() {
+  renderCollection();
   $('library-list').replaceChildren();
   const list = state.library.filter(item => item.kind !== 'specimen');
   if (!list.length) { $('library-list').append(textElement('li','Open a Markdown file to begin.','library-status')); return; }
@@ -4105,12 +4237,12 @@ function renderLibrary() {
     button.append(numeral,text,icon(entry.id === state.current?.id ? 'check':'arrow'));
     button.addEventListener('click',async () => {
       closeDialog('library-dialog');
-      await loadDocument(entry,{section:entry.section});
+      await openEntry(entry);
     }); li.append(button); $('library-list').append(li);
   }
 }
 function showLibrary() { renderLibrary(); $('library-error').hidden = true; openDialog('library-dialog'); }
-['library-trigger','open-welcome','next-volume'].forEach(id => $(id).addEventListener('click',showLibrary));
+['library-trigger','open-welcome'].forEach(id => $(id).addEventListener('click',showLibrary));
 
 async function fetchText(url, parentSignal) {
   const controller = new AbortController();
@@ -4150,8 +4282,9 @@ async function getSource(descriptor, signal) {
   if (descriptor.kind === 'repository' && /^https?:$/.test(location.protocol)) {
     const local = new URL(descriptor.path,new URL('.',location.href)).href;
     try { return {text:await fetchText(local,signal),sourceURL:local}; }
-    catch (error) { if (signal.aborted) throw error; }
+    catch (error) { if (signal.aborted || !descriptor.sourceURL) throw error; }
   }
+  if (!descriptor.sourceURL) throw new Error("Open this manuscript from a hosted collection, or choose its local Markdown file.");
   return {text:await fetchText(descriptor.sourceURL,signal),sourceURL:descriptor.sourceURL};
 }
 function setBusy(on, text='Opening manuscript…') {
@@ -4178,20 +4311,10 @@ async function loadDocument(descriptor, options = {}) {
     if (candidate.kind !== 'specimen') addToLibrary(candidate);
     state.current = candidate; state.sourceFragment = sourceFragment; state.renderedCitations = state.settings.citations;
     $('manuscript').replaceChildren(fragment);
-    $('welcome').hidden = true; $('manuscript').hidden = false; $('manuscript-end').hidden = false;
-    $('title-content').replaceChildren();
-    const kicker = textElement('div',candidate.kind === 'specimen' ? 'Typography specimen · not a translation' : candidate.number ? `卷${hanNumber(candidate.number)} · ${fileLabel(candidate.path || candidate.filename)}` : 'The manuscript','volume-kicker');
-    const heading = prepared.titleNode || textElement('h1',title); heading.classList.add('volume-title'); heading.id ||= 'volume-title';
-    if (chineseDominant(title)) heading.lang='zh';
-    $('title-content').append(kicker,heading);
-    $('manuscript').setAttribute('aria-labelledby',heading.id);
-    $('bookplate-text').textContent = CONFIG.chineseTitle;
-    const shortTitle = candidate.kind === 'specimen' ? 'Type specimen' : candidate.number ? `Juan ${String(candidate.number).padStart(2,'0')}` : candidate.filename ? fileLabel(candidate.filename) : title;
-    $('toolbar-volume').textContent=shortTitle; $('side-volume-title').textContent=shortTitle;
-    $('volume-glyph').textContent = candidate.number ? '卷'+hanNumber(candidate.number) : '文';
-    $('side-volume-sub').textContent=candidate.kind === 'specimen' ? 'Reader documentation' : candidate.kind === 'repository' ? 'Translation manuscript' : 'Local / selected manuscript';
-    $('toc-label').textContent='In this volume'; $('edition-label').textContent = candidate.kind === 'specimen' ? 'An interface specimen, not source text' : 'The translation in progress';
-    $('source-kind').textContent = candidate.kind === 'specimen' ? 'Design specimen' : candidate.kind === 'embedded' ? 'Offline reading copy' : candidate.kind === 'local' || candidate.kind === 'paste' ? 'Local manuscript' : 'Translation manuscript';
+    setView('reading');
+    renderWorkIdentity(candidate, prepared.titleNode);
+    const shortTitle = candidate.title;
+    $('source-kind').textContent = candidate.kind === 'specimen' ? 'Design specimen' : candidate.kind === 'embedded' ? 'Offline reading copy' : candidate.kind === 'local' || candidate.kind === 'paste' ? 'Local manuscript' : 'Public manuscript';
     $('source-status').textContent=candidate.kind === 'specimen' ? 'Not source text' : candidate.kind === 'local' || candidate.kind === 'paste' || candidate.kind === 'embedded' ? 'Opened locally' : 'Loaded from source';
     $('source-button').disabled = false; $('bookmark-button').disabled = candidate.kind === 'specimen';
     const countable = $('manuscript').cloneNode(true);
@@ -4201,14 +4324,14 @@ async function loadDocument(descriptor, options = {}) {
     const hanChars = (plainText.match(/\p{Script=Han}/gu) || []).length;
     state.minutes = Math.max(1,Math.ceil(latinWords/200 + hanChars/350));
     $('reading-estimate').textContent = `About ${state.minutes} min read`;
-    if (compiled.metadata.translator) $('reading-estimate').textContent += ' · '+compiled.metadata.translator;
-    $('end-caption').textContent=candidate.kind === 'specimen' ? 'End of the typography specimen. Your translation will replace this text.' : 'You have reached the end of this manuscript.';
+
+    $('end-caption').textContent=candidate.kind === 'specimen' ? 'End of the typography specimen. Open your own manuscript to read.' : 'You have reached the end of this manuscript.';
     document.title=shortTitle+' · '+CONFIG.title;
     buildOutline(); buildSearchIndex(); updateBookmarkUI(); renderLibrary();
     setBusy(false); $('load-message').hidden=true;
     const position = storageRead('position:'+candidate.id);
     state.restoring=true; window.scrollTo({top:0,behavior:'instant'});
-    if (options.updateURL !== false) updateLocation(candidate,'',!state.loadedFromURL);
+    if (options.updateURL !== false) updateLocation(candidate,'',false);
     state.loadedFromURL=true;
     if (requestedHash) {
       requestAnimationFrame(() => { goToHash(requestedHash,false); state.restoring=false; updateProgress(); });
@@ -4231,7 +4354,7 @@ async function loadDocument(descriptor, options = {}) {
     return false;
   }
 }
-$('retry-button').addEventListener('click',() => loadDocument(state.retryDescriptor || fromProject(CONFIG.initialFile)));
+$('retry-button').addEventListener('click',() => { if(state.retryDescriptor) loadDocument(state.retryDescriptor); });
 
 async function discoverVolumes() {
   $('refresh-library').disabled=true;
@@ -4254,6 +4377,7 @@ async function discoverVolumes() {
         renderLibrary(); return;
       } catch(error) { manifestError=error; }
     }
+    if (!apiDirectory) throw manifestError || new Error('No published collection is configured.');
     const listing=JSON.parse(await fetchText(apiDirectory));
     if (!Array.isArray(listing)) throw new Error('The repository listing was not available.');
     const files=listing.filter(item=>item.type==='file' && /\.(md|markdown)$/i.test(item.name));
@@ -4346,33 +4470,48 @@ function jumpTo(id, options={}) {
   el.scrollIntoView({behavior:reduceMotion.matches || options.instant ? 'instant':'smooth',block:'start'});
   if (options.flash) { el.classList.remove('search-flash'); void el.offsetWidth; el.classList.add('search-flash'); }
   if (options.focus !== false) { el.setAttribute('tabindex','-1'); el.focus({preventScroll:true}); }
-  if (options.history !== false && state.current?.kind !== 'local' && state.current?.kind !== 'paste' && state.current?.kind !== 'specimen') updateLocation(state.current,'#'+id,false);
+  if (state.view === 'reading' && options.history !== false && state.current?.kind !== 'local' && state.current?.kind !== 'paste' && state.current?.kind !== 'specimen') updateLocation(state.current,'#'+id,false);
   return true;
 }
 function goToHash(hash, update=true) {
   let id=hash.replace(/^#/,''); try { id=decodeURIComponent(id); } catch (_) {}
   return jumpTo($(id) ? id : 'md-'+id,{instant:!update,history:update});
 }
-function updateLocation(descriptor,hash='',replace=false) {
+function updateLocation(descriptor, hash='', replace=false, view='reading') {
   if (!/^https?:$/.test(location.protocol)) return;
   try {
-    const url=new URL(location.href); url.searchParams.delete('file'); url.searchParams.delete('src'); url.searchParams.delete('demo');
-    if (descriptor?.kind==='repository') url.searchParams.set('file',descriptor.path);
-    else if (descriptor?.kind==='url') url.searchParams.set('src',descriptor.sourceURL);
-    else if (descriptor?.kind==='specimen') url.searchParams.set('demo','1');
-    url.hash=hash;
-    if (url.href===location.href) return;
-    history[replace ? 'replaceState':'pushState']({reader:true},'',url);
+    const url = new URL(location.href);
+    ['file','src','demo'].forEach(key => url.searchParams.delete(key));
+    if (view === 'reading') {
+      if (descriptor?.kind === 'repository') url.searchParams.set('file',descriptor.path);
+      else if (descriptor?.kind === 'url') url.searchParams.set('src',descriptor.sourceURL);
+      else if (descriptor?.kind === 'specimen') url.searchParams.set('demo','1');
+    }
+    url.hash = hash;
+    const id = view === 'reading' ? descriptor?.id || null : null;
+    if (url.href === location.href && history.state?.view === view && history.state?.id === id) return;
+    history[replace ? 'replaceState' : 'pushState']({reader:true,view,id},'',url);
   } catch (_) {}
 }
-window.addEventListener('popstate',()=>{
-  const params=new URLSearchParams(location.search);
+window.addEventListener('popstate', event => {
+  const params = new URLSearchParams(location.search), itemId = event.state?.id;
+  if (event.state?.view === 'collection' || (!itemId && !params.has('file') && !params.has('src') && params.get('demo') !== '1')) {
+    showCollection({updateURL:false,focus:false}); return;
+  }
   try {
-    const descriptor=params.get('src') ? fromURL(params.get('src')) : params.get('demo')==='1' ? specimenDescriptor() : fromProject(params.get('file') || CONFIG.initialFile);
-    if (state.current?.id===descriptor.id) { if (location.hash) goToHash(location.hash,false); else window.scrollTo({top:0}); }
-    else loadDocument(descriptor,{section:location.hash,updateURL:false});
-  } catch(error) { showError(error.message,false); }
+    let descriptor = itemId ? state.library.find(e => e.id === itemId) : null;
+    if (!descriptor && itemId === state.current?.id) descriptor = state.current;
+    if (!descriptor && params.get('src')) descriptor = fromURL(params.get('src'));
+    if (!descriptor && params.get('demo') === '1') descriptor = specimenDescriptor();
+    if (!descriptor && params.get('file')) descriptor = fromProject(params.get('file'));
+    if (!descriptor) { showCollection({updateURL:false}); return; }
+    if (state.current?.id === descriptor.id) {
+      returnToReading({updateURL:false,focus:false});
+      if (location.hash) goToHash(location.hash,false);
+    } else loadDocument(descriptor,{section:location.hash,updateURL:false});
+  } catch (error) { showError(error.message,false); }
 });
+
 function activeLocation() {
   const target=105; let current=state.headings[0];
   for (const heading of state.headings) {
@@ -4385,7 +4524,7 @@ function currentPosition() {
   return {progress:state.progress, heading:heading?.id || '', offset:node ? node.getBoundingClientRect().top : 0, at:Date.now()};
 }
 function savePosition(force=false) {
-  if (!state.current || state.current.kind==='specimen' || state.restoring || state.busy || !state.hasMoved) return;
+  if (state.view !== 'reading' || !state.current || state.current.kind==='specimen' || state.restoring || state.busy || !state.hasMoved) return;
   if (!force && Date.now()-state.lastSave<1000) return;
   state.lastSave=Date.now(); storageWrite('position:'+state.current.id,currentPosition());
 }
@@ -4397,6 +4536,7 @@ function restorePosition(position) {
 }
 let scrollQueued=false;
 function updateProgress() {
+  if (state.view !== 'reading') return;
   const length=Math.max(1,document.documentElement.scrollHeight-innerHeight);
   state.progress=Math.max(0,Math.min(1,window.scrollY/length));
   const percent=Math.round(state.progress*100);
@@ -4422,7 +4562,7 @@ function updateBookmarkUI() {
   $('resume-button').hidden=!state.bookmark;
 }
 function bookmarkPosition() {
-  if (!state.current || state.current.kind==='specimen') return notify('Open a translation manuscript to save a bookmark.');
+  if (state.view !== 'reading' || !state.current || state.current.kind==='specimen') return notify('Open a manuscript to save a bookmark.');
   const old=state.bookmark, position=currentPosition();
   if (old && Math.abs(old.progress-position.progress)<.01) {
     storageRemove('bookmark:'+state.current.id); updateBookmarkUI(); notify('Bookmark removed.'); return;
@@ -4437,7 +4577,7 @@ function syncFocus() {
   syncSidebarAccess(); $('focus-button').setAttribute('aria-pressed',String(active));
   $('focus-button').setAttribute('aria-label',active ? 'Leave focus mode':'Enter focus mode');
 }
-function toggleFocus() { closeNav(false); document.body.classList.toggle('focus-mode'); syncFocus(); }
+function toggleFocus() { if (state.view !== 'reading') return; closeNav(false); document.body.classList.toggle('focus-mode'); syncFocus(); }
 $('focus-button').addEventListener('click',toggleFocus);
 
 function buildSearchIndex() {
@@ -4455,7 +4595,7 @@ function buildSearchIndex() {
   $('search-input').value=''; renderSearch();
 }
 function showSearch() {
-  if (!state.current) return notify('Open a manuscript to search its text.','Open library',showLibrary);
+  if (state.view !== 'reading' || !state.current) return notify('Open a manuscript to search its text.','Open library',showLibrary);
   openDialog('search-dialog'); $('search-input').focus(); $('search-input').select(); renderSearch();
 }
 $('search-trigger').addEventListener('click',showSearch);
@@ -4560,13 +4700,14 @@ $('note-content').addEventListener('click',e=>{
 function showSource() {
   if (!state.current) {
     $('source-textarea').value='No manuscript is loaded yet.';
-    $('source-description').textContent='The first configured source is translation/juan-01.md. Open it from the repository, or import your downloaded Markdown.';
+    $('source-description').textContent='Open a manuscript to view its original Markdown and export a reading copy.';
   } else {
     $('source-textarea').value=state.current.text;
-    $('source-description').textContent=state.current.kind==='specimen' ? 'Typography specimen only. This is not text from the linked translation.' : state.current.filename || state.current.path || state.current.title;
+    $('source-description').textContent=state.current.kind==='specimen' ? 'Typography specimen only. This is not a source text or translation.' : state.current.filename || state.current.path || state.current.title;
   }
-  $('github-link').href=state.current?.githubURL || githubBase+CONFIG.initialFile;
-  $('github-link').hidden=!!state.current && !state.current.githubURL && state.current.kind!=='repository';
+  const sourceLink=state.current?.githubURL;
+  if(sourceLink) $('github-link').href=sourceLink; else $('github-link').removeAttribute('href');
+  $('github-link').hidden=!sourceLink;
   ['download-markdown','export-reader','export-epub','print-button'].forEach(id=>$(id).disabled=!state.current);
   openDialog('source-dialog');
 }
@@ -4644,11 +4785,11 @@ $('epub-form').addEventListener('submit', async event => {
 });
 
 $('print-button').addEventListener('click',()=>{closeDialog('source-dialog');window.print();});
-$('home-link').addEventListener('click',e=>{e.preventDefault();closeNav(false);window.scrollTo({top:0,behavior:reduceMotion.matches?'instant':'smooth'});});
+
 
 const SPECIMEN = `# The shape of a reading page
 
-This is a typography specimen, written for the reader itself. It is not a passage from the Sanming Tonghui, and it is not part of your translation. It shows how the page gives room to an English paragraph, a Chinese phrase, a table, and the small but essential work of a footnote.[^reading]
+This is a typography specimen, written for the reader itself. It is not a passage from any source work or translation. It shows how the page gives room to an English paragraph, a Chinese phrase, a table, and the small but essential work of a footnote.[^reading]
 
 ## The text and the voices it cites
 
@@ -4707,7 +4848,7 @@ Reading history belongs to the reader. The page remembers its settings and your 
 
 ---
 
-*End of specimen. Open your own Markdown to begin reading the translation.*
+*End of specimen. Open your own Markdown to begin reading.*
 
 [^reading]: The estimated reading time is a rough interface aid, not a claim about how quickly a complex text should be read. Take the time the passage needs.
 
@@ -4736,7 +4877,8 @@ document.addEventListener('keydown',e=>{
 
 async function start() {
   const stored=storageRead('settings'); if (stored && typeof stored==='object') state.settings={...defaults,...stored};
-  applySettings(false); syncSidebarAccess(); addToLibrary(fromProject(CONFIG.initialFile)); renderLibrary(); buildWelcomeOutline();
+  applySettings(false); syncSidebarAccess(); renderLibrary(); setView('collection');
+  $('refresh-library').hidden = !apiDirectory;
   $('bookmark-button').disabled=true;
   const params=new URLSearchParams(location.search);
   const embeddedText=$('embedded-manuscript').textContent;
@@ -4749,7 +4891,7 @@ async function start() {
         await loadDocument(desc,{updateURL:false,section:location.hash});return;
       }
     }
-    if (!CONFIG.autoLoad && !params.has('src') && !params.has('file')) return;
+    if ((!CONFIG.autoLoad || !CONFIG.initialFile) && !params.has('src') && !params.has('file')) { updateLocation(null,'',true,'collection'); return; }
     const descriptor=params.get('src') ? fromURL(params.get('src')) : fromProject(params.get('file') || CONFIG.initialFile);
     await loadDocument(descriptor,{updateURL:false,section:location.hash});
     // Discover only on hosted sites; local files do not generate additional requests.

@@ -1,5 +1,1 @@
-{
-  "volumes": [
-    { "path": "translation/juan-01.md", "title": "Juan 01" }
-  ]
-}
+{"volumes":[{"path":"texts/example-a.md","title":"Example work A"},{"path":"texts/example-b.md","title":"Example work B"}]}

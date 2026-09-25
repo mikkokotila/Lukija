@@ -1,8 +1,8 @@
 # Lukija
 
-**[Open the live reader](https://lukija.mailme-758.workers.dev)** · [Reader checks](https://github.com/mikkokotila/Lukija/actions/workflows/ci.yml)
+**[Open the live reader](https://reader.nektari.fi)** · [Reader checks](https://github.com/mikkokotila/Lukija/actions/workflows/ci.yml)
 
-A quiet reading room for Markdown manuscripts, with a culturally considered Sanming Tonghui reading edition. Paper, ink, restrained vermilion, generous typography, and a clear distinction between the root text and the voices it cites.
+A quiet reading room for Chinese metaphysical works and their translations, without a default book identity. Paper, ink, restrained vermilion, generous typography, and a clear distinction between the root text and the voices it cites.
 
 **The reader is a self-contained HTML file.** Runtime reading, local imports, citation formatting, offline HTML export, and EPUB export require no server-side code, external scripts, external fonts, or installation.
 
@@ -10,7 +10,27 @@ A quiet reading room for Markdown manuscripts, with a culturally considered Sanm
 
 Open `public/index.html` in a browser, or use the deployed site. Choose **Open Markdown**, select one or more `.md` files, or paste Markdown through the library. Public Markdown URLs can also be opened. Use **Explore the typography** for a clearly labelled interface specimen, not a source translation.
 
-The supplied `mikkokotila/Sanming-Tongshui` repository is private. Its manuscripts are **not** copied into this repository or deployed. The public app therefore starts on its welcome page rather than trying to fetch private content. Download a manuscript from your private repository and open it locally in the reader. This does not upload it to Cloudflare or GitHub.
+Local files are read on your device, not uploaded. The public reader includes no source manuscripts and does not request a private repository on startup.
+
+## Collection and reading rooms
+
+**Lukija** is the permanent application identity. The **Collection** is its neutral home; **Reading room** is the current work. Returning home keeps the current work available in memory, including its position. Browser Back and Forward work within the session. Reloading does not restore imported manuscripts.
+
+**Open in this session** contains temporary local files and opened links. **The collection** is a separate shelf for intentionally published works, empty by default. No text-saving service or catalogue database is added.
+
+Each manuscript supplies its heading. Optional flat frontmatter adds work-level identity without rewriting the text:
+
+```yaml
+---
+work_title: Example work
+chinese_title: 天地之理
+author: Example author
+translator: Example translator
+edition: Study edition
+---
+```
+
+The first H1 remains the displayed manuscript title; otherwise the reader uses `title` frontmatter or the filename. `work_title` identifies the parent work for a volume. Chinese titles and credits are shown only when supplied, except that a Chinese-only heading can also supply the Chinese title. Missing fields never inherit another work's branding. Metadata is displayed as text, not HTML.
 
 ## Export an EPUB
 
@@ -79,9 +99,11 @@ Test manuscripts are synthetic. They are not excerpts copied from the private tr
 
 ## Manuscripts and configuration
 
-Edit the `CONFIG` object in `public/index.html` to change the display title, Chinese title, repository, branch, initial manuscript, and storage namespace. The source repository's original spelling is preserved. `autoLoad` is intentionally `false` for this public deployment. Set it to `true` only when the configured initial manuscript is publicly accessible or intentionally served from the same site.
+The `CONFIG` object has no default source repository, initial manuscript, or book identity. Keep `autoLoad` false for the neutral collection. Configure the optional public repository fields to enable **Refresh published collection**, which checks a same-site `reader-manifest.json` before repository discovery. This is the existing opt-in loader, not a text-storage service.
 
-A public site may use `reader-manifest.json`; `public/reader-manifest.example.json` shows the shape. Do not rename it into an active manifest until its listed files exist and are intended for publication. Private manuscript directories are ignored by Git as an additional guard, not as access control. Anything under the deployed `public/` directory can be public regardless of `.gitignore`.
+`public/reader-manifest.example.json` is an example, not an active catalogue. Only publish a manifest when its files exist and are intended to be public. Anything deployed under `public/` can be public regardless of `.gitignore`.
+
+The legacy browser-storage prefix preserves existing preferences and bookmarks. Imported manuscripts are not written to browser storage. Work identity is derived independently for each manuscript.
 
 Explicit Markdown blockquotes (`>`) are always respected. Automatic citation formatting recognizes attributed quotations with matching quotation marks, while uncertain boundaries stay inline. See [CITATION-FORMATTING.md](CITATION-FORMATTING.md). Formatting changes the rendered view, not the Markdown.
 

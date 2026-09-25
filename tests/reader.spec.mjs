@@ -53,7 +53,7 @@ test('welcome does not request the private translation', async ({page}) => {
   await expect(page.locator('#load-message')).toBeHidden();
 });
 test('export is disabled until a manuscript is loaded', async ({page}) => {
-  await source(page); await expect(page.locator('#export-epub')).toBeDisabled();
+  await expect(page.locator('#source-button')).toBeHidden(); await expect(page.locator('#export-epub')).toBeDisabled();
 });
 test('root text, quoted voices and ordinary terms remain distinct', async ({page}) => {
   await load(page);
