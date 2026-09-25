@@ -71,6 +71,7 @@ test('EPUB is a complete package with well-formed XML', async ({page},info) => {
   for(const [name,value] of Object.entries(files)) if(/\.(xml|opf|xhtml|ncx)$/.test(name)) expect((await xml(page,value)).error,name).toBe('');
   expect(files['EPUB/package.opf']).toContain('version="3.0"');
   expect(files['EPUB/package.opf']).toContain('properties="nav"');
+  expect(files['EPUB/title.xhtml']).toContain('href="nav.xhtml"');
   expect(files['EPUB/toc.ncx']).toContain('navPoint');
 });
 test('EPUB keeps citations, repeated-note backlinks, Chinese and tables', async ({page},info) => {

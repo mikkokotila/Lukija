@@ -1,5 +1,7 @@
 # Lukija
 
+**[Open the live reader](https://lukija.mailme-758.workers.dev)** · [Reader checks](https://github.com/mikkokotila/Lukija/actions/workflows/ci.yml)
+
 A quiet reading room for Markdown manuscripts, with a culturally considered Sanming Tonghui reading edition. Paper, ink, restrained vermilion, generous typography, and a clear distinction between the root text and the voices it cites.
 
 **The reader is a self-contained HTML file.** Runtime reading, local imports, citation formatting, offline HTML export, and EPUB export require no server-side code, external scripts, external fonts, or installation.
