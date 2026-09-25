@@ -1,0 +1,5 @@
+{
+  "volumes": [
+    { "path": "translation/juan-01.md", "title": "Juan 01" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "lukija",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "A quiet, citation-aware Markdown reading room with offline HTML and EPUB export.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && wrangler dev",
+    "serve": "node scripts/serve.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "test": "npm run build && playwright test",
+    "test:epub": "node scripts/check-epubs.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "wrangler": "4.140.0"
+  }
+}

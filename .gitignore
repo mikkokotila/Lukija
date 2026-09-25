@@ -1,0 +1,13 @@
+node_modules/
+.wrangler/
+.dev.vars*
+.env*
+.DS_Store
+playwright-report/
+test-results/
+.epubcheck/
+*.epub
+# Manuscripts are not part of the public reader. Publishing one must be deliberate.
+private/
+translation/
+public/translation/
